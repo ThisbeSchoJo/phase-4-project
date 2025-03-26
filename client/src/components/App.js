@@ -4,29 +4,29 @@ import Header from "./Header"
 import NavBar from "./NavBar";
 
 function App() {
-  const [volcanoes, setVolcanoes] = useState([])
+  // const [volcanoes, setVolcanoes] = useState([])
 
 
-  useEffect(getVolcanoes, [])
+  // useEffect(getVolcanoes, [])
 
-  function getVolcanoes(){
-    fetch("/volcanoes")
-    .then(response => response.json())
-    .then(volcanoesData => setVolcanoes(volcanoesData))
-  }
+  // function getVolcanoes(){
+  //   fetch("/volcanoes")
+  //   .then(response => response.json())
+  //   .then(volcanoesData => setVolcanoes(volcanoesData))
+  // }
 
-  function addVolcano(newVolcano){
-    setVolcanoes([...volcanoes, newVolcano])
+  // function addVolcano(newVolcano){
+  //   setVolcanoes([...volcanoes, newVolcano])
 
-  }
+  // }
 
   return (
     <div className="app">
       <NavBar />
       <Header/>
-      <Outlet context={
+      {/* <Outlet context={
         volcanoes
-      }/>
+      }/> */}
     </div>
   );
 }

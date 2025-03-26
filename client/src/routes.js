@@ -1,6 +1,6 @@
 import App from "./components/App";
 import ErrorPage from "./components/ErrorPage"
-import VolcanoList from "./components/VolcanoList"
+import DyeList from "./components/DyeList"
 
 const routes = [
     {
@@ -10,11 +10,11 @@ const routes = [
         children: [
             {
                 path: "/",
-                element: <VolcanoList />
+                element: <DyeList />
             },
             {
-                path: "/add_volcano",
-                element: <NewVolcanoForm />
+                path: "/add_dye",
+                element: <NewDyeForm />
             }
         ]
     }
