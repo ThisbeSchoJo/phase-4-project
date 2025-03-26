@@ -38,48 +38,54 @@ class AllDyeMaterials(Resource):
             }
             return make_response(response_body, 422)
 
-
 api.add_resource(AllDyeMaterials, '/dyematerials')
 
-# class VolcanoByID(Resource):
-#     def get(self, id):
-#         volcano = db.session.get(Volcano, id)
+class DyeMaterialByID(Resource):
+    def get(self, id):
+        dye_material = db.session.get(DyeMaterial, id)
+        if dye_material:
+            response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
+            make_response(response_body, 200)
+        else:
+            response_body = {
+                "error" : "Dye material not found!"
+            }
+            make_response(response_body, 404)
 
-#         if volcano:
-#             response_body = volcano.to_dict(only=('id', 'location', 'image'))
-#             return make_response(response_body, 200)
-#         else:
-#             response_body = {
-#                 "error": "Volcano Not Found!"
-#             }
-#             return make_response(response_body, 404)
-        
-#     def patch(self, id):
-#         volcano = db.session.get(Volcano, id)
-#         if volcano:
-#             try:
-#                 for attr in request.json:
-#                     setattr(volcano, attr, request.json[attr])
-#                 db.session.commit()
-#                 response_body = volcano.to_dict(only=('id', 'location', 'image'))
-#                 return make_response(response_body, 200)
-#             except:
-#                 pass
-#         else:
-#             response_body = {
-#                 "error": "Volcano Not Found!"
-#             }
-#             return make_response(response_body, 404)
-#     def delete(self, id):
-#         volcano = db.session.get(Volcano, id)
-#         if volcano:
-#             db.session.delete(volcano)
-#             db.session.commit()
-#             return make_response({}, 204)
-#         else:
-#             pass
+    def patch(self, id):
+        dye_material = db.session.get(DyeMaterial, id)
+        if dye_material:
+            try:
+                for attr in request.json:
+                    setattr(dye_material, attr, request.json[attr])
+                db.session.commit()
+                response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
+                return make_response(response_body, 200)
+            except Exception as e:
+                response_body = {
+                    "error": str(e)
+                }
+                return make_response(response_body, 422)
+        else:
+            response_body = {
+                "error": "Dye material not found!"
+            }
+            return make_response(response_body, 404)
 
-# api.add_resource(VolcanoByID, '/volcanoes/<int:id>')
+    def delete(self, id):
+        dye_material = db.session.get(DyeMaterial, id)
+        if dye_material:
+            db.session.delete(dye_material)
+            db.session.commit()
+            return make_response({}, 204)
+        else:
+            response_body = {
+                "error": "Dye material not found!"
+            }
+            return make_response(response_body, 404)
+            
+api.add_resource(DyeMaterialByID, '/dyematerials/<int:id>')
+
 
 
 # @app.route('/')
