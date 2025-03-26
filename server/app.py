@@ -86,18 +86,15 @@ class DyeMaterialByID(Resource):
             
 api.add_resource(DyeMaterialByID, '/dyematerials/<int:id>')
 
+@app.route('/')
+def index():
+    return '<h1>Project Server</h1>'
 
-
-# @app.route('/')
-# def index():
-#     return '<h1>Project Server</h1>'
-
-
-# if __name__ == '__main__':
-#     app.run(port=5555, debug=True)
+if __name__ == '__main__':
+    app.run(port=5555, debug=True)
 
 
 
 
-# # Authentication
-# # 
+# Authentication
+    
