@@ -16,16 +16,21 @@ from models import DyeMaterial
 
 class AllDyeMaterials(Resource):
     def get(self):
-        dyeMaterialss = dyeMaterials.query.all()
-        response_body = [volcano.to_dict(only=('id', 'location', 'image')) for volcano in volcanoes]
+        dye_materials = DyeMaterial.query.all()
+        response_body = [material.to_dict(only=('id', 'name', 'base_color', 'image')) for material in dyeMaterials]
         return make_response(response_body, 200)
 
     def post(self):
         try:
-            new_volcano = Volcano(location=request.json.get('location', image=request.json.get('image')))
-            db.session.add(new_volcano)
+            new_material = DyeMaterial(
+                name = request.json.get('name'),
+                base_color=request.json.get('base_color'),
+                image = request.json.get('image')
+            )
+
+            db.session.add(new_material)
             db.session.commit()
-            response_body = new_volcano.to_dict('id','location','image')
+            response_body = new_material.to_dict(only = ('id','name', 'base_color', 'image'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
