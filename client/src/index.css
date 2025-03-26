@@ -1,7 +1,12 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+div.app {
+  text-align: center;
 }
 
+li.volcano {
+  list-style-type: none;
+}
+
+nav a {
+  padding: 10px;
+  text-decoration: none;
+}
