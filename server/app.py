@@ -17,7 +17,7 @@ from models import DyeMaterial
 class AllDyeMaterials(Resource):
     def get(self):
         dye_materials = DyeMaterial.query.all()
-        response_body = [material.to_dict(only=('id', 'name', 'base_color', 'image')) for material in dyeMaterials]
+        response_body = [material.to_dict(only=('id', 'name', 'base_color', 'image')) for material in dye_materials]
         return make_response(response_body, 200)
 
     def post(self):

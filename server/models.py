@@ -19,8 +19,8 @@ class DyeMaterial(db.Model, SerializerMixin):
     def validate_location(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif len(value) < 4:
-            raise ValueError(f"{column_name} must be at least 5 characters long!")
+        elif len(value) < 3:
+            raise ValueError(f"{column_name} must be at least 3 characters long!")
         else:
             return value
         
@@ -42,8 +42,8 @@ class Mordant(db.Model, SerializerMixin):
     def validate_location(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif len(value) < 4:
-            raise ValueError(f"{column_name} must be at least 5 characters long!")
+        elif len(value) < 3:
+            raise ValueError(f"{column_name} must be at least 3 characters long!")
         else:
             return value
         
@@ -67,8 +67,8 @@ class DyeResult(db.Model, SerializerMixin):
     def validate_location(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif len(value) < 4:
-            raise ValueError(f"{column_name} must be at least 5 characters long!")
+        elif len(value) < 3:
+            raise ValueError(f"{column_name} must be at least 3 characters long!")
         else:
             return value
         
