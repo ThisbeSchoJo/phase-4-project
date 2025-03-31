@@ -9,7 +9,7 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import DyeMaterial
+from models import DyeMaterial, Mordant, DyeResult
 
 
 # Views go here!
@@ -38,7 +38,7 @@ class AllDyeMaterials(Resource):
             }
             return make_response(response_body, 422)
 
-api.add_resource(AllDyeMaterials, '/dyematerials')
+api.add_resource(AllDyeMaterials, '/dye-materials')
 
 class DyeMaterialByID(Resource):
     def get(self, id):
@@ -84,7 +84,65 @@ class DyeMaterialByID(Resource):
             }
             return make_response(response_body, 404)
             
-api.add_resource(DyeMaterialByID, '/dyematerials/<int:id>')
+api.add_resource(DyeMaterialByID, '/dye-materials/<int:id>')
+
+
+class AllMordants(Resource):
+    def get(self):
+        mordants = Mordant.query.all()
+        response_body = [mordant.to_dict(only=('id', 'name', 'effect', 'image')) for mordant in mordants]
+        return make_response(response_body, 200)
+
+    def post(self):
+        try:
+            new_mordant = Mordant(
+                name = request.json.get('name'),
+                effect=request.json.get('effect'),
+                image = request.json.get('image')
+            )
+
+            db.session.add(new_mordant)
+            db.session.commit()
+            response_body = new_mordant.to_dict(only = ('id','name', 'effect', 'image'))
+            return make_response(response_body, 201)
+        except Exception as e:
+            response_body = {
+                "error": str(e)
+            }
+            return make_response(response_body, 422)
+
+api.add_resource(AllMordants, '/mordants')
+
+
+
+# Add create and read actions for each resource
+class AllDyeResults(Resource):
+    def get(self):
+        dye_results = DyeResult.query.all()
+        response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity')) for result in dye_results]
+        return make_response(response_body, 200)
+
+    def post(self):
+        try:
+            new_dye_result = DyeResult(
+                dye_material_id = request.json.get('dye_material_id'),
+                mordant_id=request.json.get('mordant_id'),
+                resulting_color = request.json.get('resulting_color'),
+                intensity = request.json.get('intensity')
+            )
+
+            db.session.add(new_dye_result)
+            db.session.commit()
+            response_body = new_dye_result.to_dict(only = ('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+            return make_response(response_body, 201)
+        except Exception as e:
+            response_body = {
+                "error": str(e)
+            }
+            return make_response(response_body, 422)
+
+api.add_resource(AllDyeResults, '/dye-results')
+
 
 @app.route('/')
 def index():
