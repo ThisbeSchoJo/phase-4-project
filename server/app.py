@@ -45,12 +45,12 @@ class DyeMaterialByID(Resource):
         dye_material = db.session.get(DyeMaterial, id)
         if dye_material:
             response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
-            make_response(response_body, 200)
+            return make_response(response_body, 200)
         else:
             response_body = {
                 "error" : "Dye material not found!"
             }
-            make_response(response_body, 404)
+            return make_response(response_body, 404)
 
     def patch(self, id):
         dye_material = db.session.get(DyeMaterial, id)
