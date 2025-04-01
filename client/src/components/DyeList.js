@@ -1,16 +1,19 @@
-// import { useOutletContext } from "react-router-dom"; 
-// import DyeMaterial from "./DyeMaterial"
+import { useOutletContext } from "react-router-dom"; 
+import DyeMaterial from "./DyeMaterial"
 
 function DyeList(){
 
-    // const {volcanoes} = useOutletContext()
+    const { dyeMaterials } = useOutletContext()
 
-    // const volcanoComponents = volcanoes.map(volcano => {
-    //     return <Volcano key={{volcano.id} volcano={volcano}}/>
-    // })
+    const dyeMaterialComponents = dyeMaterials.map(dyeMaterial => {
+        return <DyeMaterial key={dyeMaterial.id} dyeMaterial={dyeMaterial}/>
+    })
 
     return(
-        <h1>Here is the dye list...</h1>
+        <div>
+            <ul>{dyeMaterialComponents}</ul>
+            <h1>Here is the dye list...</h1>
+        </div>
     )
 }
 

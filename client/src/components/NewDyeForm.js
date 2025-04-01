@@ -12,6 +12,10 @@ function NewDyeForm(){
     })
 
     function handleSubmit(event) {
+
+        console.log("Submitting form with:", formData); // Debugging output
+
+
         event.preventDefault();
 
         fetch('/dye_materials', {
@@ -26,6 +30,13 @@ function NewDyeForm(){
             if (response.ok) {
                 response.json().then(newDyeData => {
                     addDye(newDyeData) //Add the new dye material to the state
+
+                    setFormData({
+                        name: "",
+                        base_color: "",
+                        image: ""
+                    })
+
                     navigate('/') //redict to home page
                 })
             } else {
