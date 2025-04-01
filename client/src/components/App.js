@@ -1,32 +1,66 @@
 import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 // import { Switch, Route } from "react-router-dom";
 import Header from "./Header"
 import NavBar from "./NavBar";
 
 function App() {
-  // const [volcanoes, setVolcanoes] = useState([])
+  const [dyeMaterials, setDyeMaterials] = useState([]);
 
+  useEffect(getDyeMaterials, [])
 
-  // useEffect(getVolcanoes, [])
+  function getDyeMaterials() {
+    fetch("/dye-materials")
+    .then((response) => response.json())
+    .then((data) => setDyeMaterials(data))
+    .catch((error) => console.error("Error fetching dye materials:", error))
+  }
+  
+  function addDyeMaterial(newMaterial) {
+    fetch("/dye-materials", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newMaterial),
+    })
+    .then((response) => response.json())
+    .then((addedMaterial) => setDyeMaterials([...dyeMaterials, addedMaterial]))
+    .catch((error) => console.error("Error adding dye material:", error))
+  }
 
-  // function getVolcanoes(){
-  //   fetch("/volcanoes")
-  //   .then(response => response.json())
-  //   .then(volcanoesData => setVolcanoes(volcanoesData))
-  // }
+  function updateDyeMaterial(updatedMaterial) {
+    fetch(`/dye-materials/${updatedMaterial.id}`,{
+      method: "PATCH",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(updatedMaterial),
+    })
+    .then((response) => response.json())
+    .then((newMaterial) => 
+      setDyeMaterials((prevMaterials) =>
+        prevMaterials.map((material) => 
+          material.id === newMaterial.id ? newMaterial : material
+    )))
+    .catch((error) => console.error("Error updating dye material:", error))
+  }
 
-  // function addVolcano(newVolcano){
-  //   setVolcanoes([...volcanoes, newVolcano])
-
-  // }
+  function deleteDyeMaterial(id) {
+    fetch(`/dye-materials/${id}`, { method: "DELETE" })
+    .then(() =>
+    setDyeMaterials((prevMaterials) =>
+    prevMaterials.filter((material) => material.id !== id)
+  ))
+  .catch((error) => console.error("Error deleting dye material:", error))
+  }
 
   return (
     <div className="app">
       <NavBar />
       <Header/>
-      {/* <Outlet context={
-        volcanoes
-      }/> */}
+      <Outlet context={{
+        dyeMaterials,
+        addDyeMaterial,
+        updateDyeMaterial,
+        deleteDyeMaterial,
+      }}/>
     </div>
   );
 }

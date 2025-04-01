@@ -1,6 +1,11 @@
+import NavBar from "./NavBar";
+
 function ErrorPage(){
     return(
-        <h1>Whoops! Something went wrong!</h1>
+        <div className="app">
+            <NavBar />
+            <h1>Whoops! Something went wrong!</h1>
+        </div>
     )
 }
 

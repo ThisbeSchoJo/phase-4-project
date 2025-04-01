@@ -1,5 +1,5 @@
-import { useOutletContext } from "react-router-dom";
-import DyeMaterial from "./DyeMaterial"
+// import { useOutletContext } from "react-router-dom"; 
+// import DyeMaterial from "./DyeMaterial"
 
 function DyeList(){
 

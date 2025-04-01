@@ -1,6 +1,7 @@
 import App from "./components/App";
 import ErrorPage from "./components/ErrorPage"
 import DyeList from "./components/DyeList"
+import NewDyeForm from "./components/NewDyeForm";
 
 const routes = [
     {
