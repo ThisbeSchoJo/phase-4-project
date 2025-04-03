@@ -73,4 +73,4 @@ class DyeResult(db.Model, SerializerMixin):
             return value
         
     def __repr__(self):
-        return f"<Mordant {self.id} - Name: {self.name}, Effect: {self.effect}, Image: {self.image}>"
+        return f"<Dye Result {self.id}, Dye Material ID: {self.dye_material_id}, Mordant ID: {self.mordant_id}, Resulting Color: {self.resulting_color}, Intensity: {self.intensity}>"
