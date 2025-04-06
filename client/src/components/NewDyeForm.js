@@ -2,7 +2,7 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function NewDyeForm(){
-    const { addDye } = useOutletContext()
+    const { addDyeMaterial } = useOutletContext()
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ function NewDyeForm(){
         .then(response => {
             if (response.ok) {
                 response.json().then(newDyeData => {
-                    addDye(newDyeData) //Add the new dye material to the state
+                    addDyeMaterial(newDyeData) //Add the new dye material to the state
 
                     setFormData({
                         name: "",

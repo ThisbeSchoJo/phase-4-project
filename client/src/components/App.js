@@ -5,10 +5,13 @@ import Header from "./Header"
 import NavBar from "./NavBar";
 
 function App() {
-  const [dyeMaterials, setDyeMaterials] = useState([]);
+  const [dyeMaterials, setDyeMaterials] = useState([])
+  const [dyeResults, setDyeResults] = useState([])
 
   useEffect(getDyeMaterials, [])
+  useEffect(getDyeResults, [])
 
+  // Dye Materials
   function getDyeMaterials() {
     fetch("/dye-materials")
     .then((response) => response.json())
@@ -51,6 +54,14 @@ function App() {
   .catch((error) => console.error("Error deleting dye material:", error))
   }
 
+  // Dye Results
+  function getDyeResults() {
+    fetch("/dye-results")
+    .then((response) => response.json())
+    .then((data) => setDyeResults(data))
+    .catch((error) => console.error("Error fetching dye results:", error))
+  }
+
   return (
     <div className="app">
       <NavBar />
@@ -60,6 +71,7 @@ function App() {
         addDyeMaterial,
         updateDyeMaterial,
         deleteDyeMaterial,
+        dyeResults
       }}/>
     </div>
   );
