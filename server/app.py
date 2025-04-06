@@ -202,8 +202,56 @@ class AllDyeResults(Resource):
 api.add_resource(AllDyeResults, '/dye-results')
 
 
-# MordantByID requests - get, patch, delete
+# DyeResultsByID requests - get, patch, delete
+class DyeResultByID(Resource):
+    def get(self, id):
+        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
+        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
+        # return make_response(response_body, 200)
 
+        dye_result = db.session.get(DyeResult, id)
+        if dye_result:
+            response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                "error" : "Dye Result not found!"
+            }
+            return make_response(response_body, 404)
+
+    def patch(self, id):
+        dye_result = db.session.get(DyeResult, id)
+        if dye_result:
+            try:
+                for attr in request.json:
+                    setattr(dye_result, attr, request.json[attr])
+                db.session.commit()
+                response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+                return make_response(response_body, 200)
+            except Exception as e:
+                response_body = {
+                    "error": str(e)
+                }
+                return make_response(response_body, 422)
+        else:
+            response_body = {
+                "error": "Dye Result not found!"
+            }
+            return make_response(response_body, 404)
+
+    def delete(self, id):
+        dye_result = db.session.get(DyeResult, id)
+        if dye_result:
+            db.session.delete(dye_result)
+            db.session.commit()
+            return make_response({}, 204)
+        else:
+            response_body = {
+                "error": "Dye Result not found!"
+            }
+            return make_response(response_body, 404)
+            
+api.add_resource(DyeResultByID, '/dye-results/<int:id>')
 
 
 if __name__ == '__main__':
