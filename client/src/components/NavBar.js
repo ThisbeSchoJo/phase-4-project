@@ -5,6 +5,7 @@ function NavBar(){
         <nav>
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/add_dye'>Add Dye Material</NavLink>
+            <NavLink to='/dye-results'>Dye Results</NavLink>
         </nav>
     )
 }
