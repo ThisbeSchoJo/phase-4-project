@@ -11,8 +11,8 @@ function DyeList(){
 
     return(
         <div>
-            <ul>{dyeMaterialComponents}</ul>
             <h1>Here is the dye list...</h1>
+            <ul>{dyeMaterialComponents}</ul>
         </div>
     )
 }

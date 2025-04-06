@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice as rc
+# from random import randint, choice as rc
 
 # Remote library imports
 
@@ -12,9 +12,9 @@ from models import db, DyeMaterial, Mordant, DyeResult
 if __name__ == '__main__':
     with app.app_context():
         # Delete current data before seeding...
+        DyeResult.query.delete()
         DyeMaterial.query.delete()
         Mordant.query.delete()
-        DyeResult.query.delete()
 
         # Begin seeding...
         print("Starting seed...")
@@ -23,8 +23,8 @@ if __name__ == '__main__':
         mordants = []
         dye_results = []
 
-        dye_materials.append(DyeMaterial(name="Indigo", base_color="Blue", image="https://example.com/indigo.jpg"))
-        dye_materials.append(DyeMaterial(name="Madder Root", base_color="Red", image="https://example.com/madder_root.jpg"))
+        dye_materials.append(DyeMaterial(name="Indigo", base_color="Blue", image="./images/indigo.jpg"))
+        dye_materials.append(DyeMaterial(name="Madder Root", base_color="Red", image="./static/images/madder-root.png"))
         dye_materials.append(DyeMaterial(name="Turmeric", base_color="Yellow", image="https://example.com/turmeric.jpg"))
         dye_materials.append(DyeMaterial(name="Red Cabbage", base_color="Purple", image="https://example.com/red_cabbage.jpg"))
         dye_materials.append(DyeMaterial(name="Pokeweed Berries", base_color="Magenta", image="https://example.com/pokeweed.jpg"))       
@@ -56,7 +56,8 @@ if __name__ == '__main__':
         dye_results.append(DyeResult(dye_material_id=7, mordant_id=2, resulting_color="#5D4037", intensity=8))  # Walnut Hulls + Iron → Deep Brown
         dye_results.append(DyeResult(dye_material_id=8, mordant_id=1, resulting_color="#FFA500", intensity=7))  # Onion Skins + Alum → Bright Orange
 
-        db.session.add_all([dye_materials, mordants, dye_results])
+        db.session.add_all(dye_materials + mordants + dye_results)
+
 
         db.session.commit()
         print("Dye materials, mordants, and dye results successfully seeded!")

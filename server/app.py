@@ -14,6 +14,11 @@ from models import DyeMaterial, Mordant, DyeResult
 
 # Views go here!
 
+@app.route('/')
+def index():
+    return "<h1>Welcome to Thisbe's Dye Shop!</h1>"
+
+# Need to convert .query method to db.session.execute bc query is legacy code in SQLalchemy
 class AllDyeMaterials(Resource):
     def get(self):
         dye_materials = DyeMaterial.query.all()
@@ -42,6 +47,10 @@ api.add_resource(AllDyeMaterials, '/dye-materials')
 
 class DyeMaterialByID(Resource):
     def get(self, id):
+        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
+        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
+        # return make_response(response_body, 200)
+
         dye_material = db.session.get(DyeMaterial, id)
         if dye_material:
             response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
@@ -103,7 +112,7 @@ class AllMordants(Resource):
 
             db.session.add(new_mordant)
             db.session.commit()
-            response_body = new_mordant.to_dict(only = ('id','name', 'effect', 'image'))
+            response_body = new_mordant.to_dict(only = ('id', 'name', 'effect', 'image'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
@@ -113,9 +122,58 @@ class AllMordants(Resource):
 
 api.add_resource(AllMordants, '/mordants')
 
+# MordantByID requests - get, patch, delete
+class MordantByID(Resource):
+    def get(self, id):
+        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
+        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
+        # return make_response(response_body, 200)
+
+        mordant = db.session.get(Mordant, id)
+        if mordant:
+            response_body = mordant.to_dict(only=('id', 'name', 'effect', 'image'))
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                "error" : "Mordant not found!"
+            }
+            return make_response(response_body, 404)
+
+    def patch(self, id):
+        mordant = db.session.get(Mordant, id)
+        if mordant:
+            try:
+                for attr in request.json:
+                    setattr(mordant, attr, request.json[attr])
+                db.session.commit()
+                response_body = mordant.to_dict(only=('id', 'name', 'effect', 'image'))
+                return make_response(response_body, 200)
+            except Exception as e:
+                response_body = {
+                    "error": str(e)
+                }
+                return make_response(response_body, 422)
+        else:
+            response_body = {
+                "error": "Mordant not found!"
+            }
+            return make_response(response_body, 404)
+
+    def delete(self, id):
+        mordant = db.session.get(Mordant, id)
+        if mordant:
+            db.session.delete(mordant)
+            db.session.commit()
+            return make_response({}, 204)
+        else:
+            response_body = {
+                "error": "Mordant not found!"
+            }
+            return make_response(response_body, 404)
+            
+api.add_resource(MordantByID, '/mordants/<int:id>')
 
 
-# Add create and read actions for each resource
 class AllDyeResults(Resource):
     def get(self):
         dye_results = DyeResult.query.all()
@@ -144,9 +202,9 @@ class AllDyeResults(Resource):
 api.add_resource(AllDyeResults, '/dye-results')
 
 
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
+# MordantByID requests - get, patch, delete
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
