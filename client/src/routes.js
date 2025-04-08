@@ -2,6 +2,7 @@ import App from "./components/App";
 import ErrorPage from "./components/ErrorPage"
 import DyeList from "./components/DyeList"
 import NewDyeForm from "./components/NewDyeForm";
+import DyeResults from "./components/DyeResult"
 
 const routes = [
     {
@@ -16,6 +17,10 @@ const routes = [
             {
                 path: "/add_dye",
                 element: <NewDyeForm />
+            },
+            {
+                path: "/dye_results",
+                element: <DyeResults />
             }
         ]
     }

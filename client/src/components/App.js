@@ -67,11 +67,11 @@ function App() {
       <NavBar />
       <Header/>
       <Outlet context={{
-        dyeMaterials,
-        addDyeMaterial,
-        updateDyeMaterial,
-        deleteDyeMaterial,
-        dyeResults
+        dyeMaterials: dyeMaterials,
+        addDyeMaterial: addDyeMaterial,
+        updateDyeMaterial: updateDyeMaterial,
+        deleteDyeMaterial: deleteDyeMaterial,
+        dyeResults: dyeResults
       }}/>
     </div>
   );

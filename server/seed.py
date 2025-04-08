@@ -23,6 +23,7 @@ if __name__ == '__main__':
         mordants = []
         dye_results = []
 
+# add RGB field
         dye_materials.append(DyeMaterial(name="Indigo", base_color="Blue", image="./images/indigo.jpg"))
         dye_materials.append(DyeMaterial(name="Madder Root", base_color="Red", image="./static/images/madder-root.png"))
         dye_materials.append(DyeMaterial(name="Turmeric", base_color="Yellow", image="https://example.com/turmeric.jpg"))
@@ -31,16 +32,16 @@ if __name__ == '__main__':
         dye_materials.append(DyeMaterial(name="Butterfly Pea Flower", base_color="Blue", image="https://example.com/butterfly_pea.jpg"))
         dye_materials.append(DyeMaterial(name="Walnut Hulls", base_color="Brown", image="https://example.com/walnut_hulls.jpg"))
         dye_materials.append(DyeMaterial(name="Onion Skins", base_color="Orange", image="https://example.com/onion_skins.jpg"))
+#091231
 
-
-
+# how it will effect the dye material
         mordants.append(Mordant(name="Alum", effect="Brightens color", image="https://example.com/alum.jpg"))
         mordants.append(Mordant(name="Iron", effect="Darkens color", image="https://example.com/iron.jpg"))
         mordants.append(Mordant(name="Copper", effect="Shifts colors towards green", image="https://example.com/copper.jpg"))
         mordants.append(Mordant(name="Vinegar", effect="Enhances red tones", image="https://example.com/vinegar.jpg"))
         mordants.append(Mordant(name="Ammonia", effect="Shifts color towards blue-green", image="https://example.com/ammonia.jpg"))
         mordants.append(Mordant(name="Tannin", effect="Increases colorfastness", image="https://example.com/tannin.jpg"))
-
+# effect = +4 to R
 
 
         dye_results.append(DyeResult(dye_material_id=1, mordant_id=1, resulting_color="#4B0082", intensity=7))  # Indigo + Alum → Deep Blue
@@ -55,6 +56,15 @@ if __name__ == '__main__':
         dye_results.append(DyeResult(dye_material_id=6, mordant_id=3, resulting_color="#4682B4", intensity=6))  # Butterfly Pea + Copper → Teal
         dye_results.append(DyeResult(dye_material_id=7, mordant_id=2, resulting_color="#5D4037", intensity=8))  # Walnut Hulls + Iron → Deep Brown
         dye_results.append(DyeResult(dye_material_id=8, mordant_id=1, resulting_color="#FFA500", intensity=7))  # Onion Skins + Alum → Bright Orange
+# just has dye material id and mordant id
+# on front end, have a way to generate what the RGB would be
+# When user creates a new dye (combines dye material and mordant) -> (calculation would occur when dyeResult is generated)
+# only able to create dye result on front end
+# stretch goal for user authorization (so authorized users can add dye materials and resulting colors)
+# stretch goal of using AI to figure out what the effect of a mordant is
+#   use AI to figure out what the dye material + mordant resulting color would be
+# open AI
+
 
         db.session.add_all(dye_materials + mordants + dye_results)
 
