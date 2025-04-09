@@ -18,6 +18,7 @@ class DyeMaterial(db.Model, SerializerMixin):
 
     dye_results = db.relationship('DyeResult', back_populates='dye_material')
 
+    serialize_only = ('id', 'name', 'image', 'r', 'g', 'b', 'hex')
     serialize_rules = ('-dye_results.dye_material',)
 
     @validates('name', 'image')
