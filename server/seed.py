@@ -45,18 +45,18 @@ if __name__ == '__main__':
 
 
         dye_results = [
-            DyeResult(dye_material_id=1, mordant_id=1, final_hex="4B0082"),  # Indigo + Alum → Deep Blue
-            DyeResult(dye_material_id=1, mordant_id=2, final_hex="2D1B1B"),  # Indigo + Iron → Dark Indigo
-            DyeResult(dye_material_id=2, mordant_id=1, final_hex="FF5733"),  # Madder + Alum → Bright Red
-            DyeResult(dye_material_id=2, mordant_id=3, final_hex="80461B"),  # Madder + Copper → Rusty Orange
-            DyeResult(dye_material_id=3, mordant_id=1, final_hex="FFD700"),  # Turmeric + Alum → Vibrant Yellow
-            DyeResult(dye_material_id=3, mordant_id=2, final_hex="A67B5B"),  # Turmeric + Iron → Mustard Brown
-            DyeResult(dye_material_id=4, mordant_id=4, final_hex="D81B60"),  # Red Cabbage + Vinegar → Pink
-            DyeResult(dye_material_id=4, mordant_id=5, final_hex="006400"),  # Red Cabbage + Ammonia → Green
-            DyeResult(dye_material_id=5, mordant_id=2, final_hex="800020"),  # Pokeweed + Iron → Burgundy
-            DyeResult(dye_material_id=6, mordant_id=3, final_hex="4682B4"),  # Butterfly Pea + Copper → Teal
-            DyeResult(dye_material_id=7, mordant_id=2, final_hex="5D4037"),  # Walnut Hulls + Iron → Deep Brown
-            DyeResult(dye_material_id=8, mordant_id=1, final_hex="FFA500"),  # Onion Skins + Alum → Bright Orange
+            DyeResult(dye_material_id=1, mordant_id=1, final_hex="#4B0082"),  # Indigo + Alum → Deep Blue
+            DyeResult(dye_material_id=1, mordant_id=2, final_hex="#2D1B1B"),  # Indigo + Iron → Dark Indigo
+            DyeResult(dye_material_id=2, mordant_id=1, final_hex="#FF5733"),  # Madder + Alum → Bright Red
+            DyeResult(dye_material_id=2, mordant_id=3, final_hex="#80461B"),  # Madder + Copper → Rusty Orange
+            DyeResult(dye_material_id=3, mordant_id=1, final_hex="#FFD700"),  # Turmeric + Alum → Vibrant Yellow
+            DyeResult(dye_material_id=3, mordant_id=2, final_hex="#A67B5B"),  # Turmeric + Iron → Mustard Brown
+            DyeResult(dye_material_id=4, mordant_id=4, final_hex="#D81B60"),  # Red Cabbage + Vinegar → Pink
+            DyeResult(dye_material_id=4, mordant_id=5, final_hex="#006400"),  # Red Cabbage + Ammonia → Green
+            DyeResult(dye_material_id=5, mordant_id=2, final_hex="#800020"),  # Pokeweed + Iron → Burgundy
+            DyeResult(dye_material_id=6, mordant_id=3, final_hex="#4682B4"),  # Butterfly Pea + Copper → Teal
+            DyeResult(dye_material_id=7, mordant_id=2, final_hex="#5D4037"),  # Walnut Hulls + Iron → Deep Brown
+            DyeResult(dye_material_id=8, mordant_id=1, final_hex="#FFA500"),  # Onion Skins + Alum → Bright Orange
         ]
 # just has dye material id and mordant id
 # on front end, have a way to generate what the RGB would be

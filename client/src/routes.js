@@ -18,16 +18,16 @@ const routes = [
                 element: <Home />
             },
             {
-                path: "/add_dye",
-                element: <NewDyeForm />
-            },
-            {
                 path: "/dyes",
                 element: <DyeList />
             },
             {
                 path: "/mordants",
                 element: <MordantList />
+            },
+            {
+                path: "/add_dye",
+                element: <NewDyeForm />
             },
             {
                 path: "/dye_results",

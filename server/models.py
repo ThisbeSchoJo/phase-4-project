@@ -99,7 +99,7 @@ class DyeResult(db.Model, SerializerMixin):
     def validate_hex(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif len(value) != 6:
+        elif len(value) != 7:
             raise ValueError(f"{column_name} must be 7 characters long!")
         else:
             return value

@@ -22,20 +22,22 @@ def index():
 class AllDyeMaterials(Resource):
     def get(self):
         dye_materials = DyeMaterial.query.all()
-        response_body = [material.to_dict(only=('id', 'name', 'base_color', 'image')) for material in dye_materials]
+        response_body = [material.to_dict(only=('id', 'name', 'r', 'g', 'b', 'image', 'hex')) for material in dye_materials]
         return make_response(response_body, 200)
 
     def post(self):
         try:
             new_material = DyeMaterial(
                 name = request.json.get('name'),
-                base_color=request.json.get('base_color'),
+                r = request.json.get('r'),
+                g = request.json.get('g'),
+                b = request.json.get('b'),
                 image = request.json.get('image')
             )
 
             db.session.add(new_material)
             db.session.commit()
-            response_body = new_material.to_dict(only = ('id','name', 'base_color', 'image'))
+            response_body = new_material.to_dict(only = ('id','name', 'r', 'g', 'b', 'image', 'hex'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
@@ -53,7 +55,7 @@ class DyeMaterialByID(Resource):
 
         dye_material = db.session.get(DyeMaterial, id)
         if dye_material:
-            response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
+            response_body = dye_material.to_dict(only=('id', 'name', 'r', 'g', 'b', 'image', 'hex'))
             return make_response(response_body, 200)
         else:
             response_body = {
@@ -68,7 +70,7 @@ class DyeMaterialByID(Resource):
                 for attr in request.json:
                     setattr(dye_material, attr, request.json[attr])
                 db.session.commit()
-                response_body = dye_material.to_dict(only=('id', 'name', 'base_color', 'image'))
+                response_body = dye_material.to_dict(only=('id', 'name', 'r', 'g', 'b', 'image', 'hex'))
                 return make_response(response_body, 200)
             except Exception as e:
                 response_body = {
@@ -99,20 +101,22 @@ api.add_resource(DyeMaterialByID, '/dye-materials/<int:id>')
 class AllMordants(Resource):
     def get(self):
         mordants = Mordant.query.all()
-        response_body = [mordant.to_dict(only=('id', 'name', 'effect', 'image')) for mordant in mordants]
+        response_body = [mordant.to_dict(only=('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image')) for mordant in mordants]
         return make_response(response_body, 200)
 
     def post(self):
         try:
             new_mordant = Mordant(
                 name = request.json.get('name'),
-                effect=request.json.get('effect'),
+                r_effect = request.json.get('r_effect'),
+                g_effect = request.json.get('g_effect'),
+                b_effect = request.json.get('b_effect'),
                 image = request.json.get('image')
             )
 
             db.session.add(new_mordant)
             db.session.commit()
-            response_body = new_mordant.to_dict(only = ('id', 'name', 'effect', 'image'))
+            response_body = new_mordant.to_dict(only = ('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
@@ -131,7 +135,7 @@ class MordantByID(Resource):
 
         mordant = db.session.get(Mordant, id)
         if mordant:
-            response_body = mordant.to_dict(only=('id', 'name', 'effect', 'image'))
+            response_body = mordant.to_dict(only=('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image'))
             return make_response(response_body, 200)
         else:
             response_body = {
@@ -146,7 +150,7 @@ class MordantByID(Resource):
                 for attr in request.json:
                     setattr(mordant, attr, request.json[attr])
                 db.session.commit()
-                response_body = mordant.to_dict(only=('id', 'name', 'effect', 'image'))
+                response_body = mordant.to_dict(only=('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image'))
                 return make_response(response_body, 200)
             except Exception as e:
                 response_body = {
@@ -177,7 +181,7 @@ api.add_resource(MordantByID, '/mordants/<int:id>')
 class AllDyeResults(Resource):
     def get(self):
         dye_results = DyeResult.query.all()
-        response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity')) for result in dye_results]
+        response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex')) for result in dye_results]
         return make_response(response_body, 200)
 
     def post(self):
@@ -185,13 +189,12 @@ class AllDyeResults(Resource):
             new_dye_result = DyeResult(
                 dye_material_id = request.json.get('dye_material_id'),
                 mordant_id=request.json.get('mordant_id'),
-                resulting_color = request.json.get('resulting_color'),
-                intensity = request.json.get('intensity')
+                final_hex = request.json.get('final_hex')
             )
 
             db.session.add(new_dye_result)
             db.session.commit()
-            response_body = new_dye_result.to_dict(only = ('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+            response_body = new_dye_result.to_dict(only = ('id', 'dye_material_id', 'mordant_id', 'final_hex'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
@@ -211,7 +214,7 @@ class DyeResultByID(Resource):
 
         dye_result = db.session.get(DyeResult, id)
         if dye_result:
-            response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+            response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex'))
             return make_response(response_body, 200)
         else:
             response_body = {
@@ -226,7 +229,7 @@ class DyeResultByID(Resource):
                 for attr in request.json:
                     setattr(dye_result, attr, request.json[attr])
                 db.session.commit()
-                response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'resulting_color', 'intensity'))
+                response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex'))
                 return make_response(response_body, 200)
             except Exception as e:
                 response_body = {
