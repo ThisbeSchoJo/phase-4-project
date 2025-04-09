@@ -46,7 +46,6 @@ class DyeMaterial(db.Model, SerializerMixin):
     def __repr__(self):
         return f"<Dye Material {self.id} - Name: {self.name}, Base Color: {self.r}{self.g}{self.b}, Image: {self.image}>"
     
-
 class Mordant(db.Model, SerializerMixin):
     __tablename__ = 'mordants'
 
@@ -58,8 +57,6 @@ class Mordant(db.Model, SerializerMixin):
     b_effect = db.Column(db.Integer, nullable=False)
 
     dye_results = db.relationship('DyeResult', back_populates='mordant')
-
-    serialize_rules = ('-dye_results.mordant',)
 
     @validates('name', 'image')
     def validate_name(self, column_name, value):
@@ -81,7 +78,7 @@ class Mordant(db.Model, SerializerMixin):
         
     def __repr__(self):
         return f"<Mordant {self.id} - Name: {self.name}, Effects: ({self.r_effect}, {self.g_effect}, {self.b_effect},) Image: {self.image}>"
-
+    
 
 class DyeResult(db.Model, SerializerMixin):
     __tablename__ = 'dye_results'
@@ -102,8 +99,8 @@ class DyeResult(db.Model, SerializerMixin):
     def validate_hex(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif not value.startswith("#") or len(value) != 7:
-            raise ValueError(f"{column_name} must be a valid hex string like '#rrggbb'!")
+        elif len(value) != 6:
+            raise ValueError(f"{column_name} must be 7 characters long!")
         else:
             return value
         

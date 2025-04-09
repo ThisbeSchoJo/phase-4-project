@@ -19,43 +19,45 @@ if __name__ == '__main__':
         # Begin seeding...
         print("Starting seed...")
 
-        dye_materials = []
-        mordants = []
-        dye_results = []
+        # dye_materials = []
+        # mordants = []
+        # dye_results = []
 
-# add RGB field
-        dye_materials.append(DyeMaterial(name="Indigo", base_color="Blue", image="./images/indigo.jpg"))
-        dye_materials.append(DyeMaterial(name="Madder Root", base_color="Red", image="./static/images/madder-root.png"))
-        dye_materials.append(DyeMaterial(name="Turmeric", base_color="Yellow", image="https://example.com/turmeric.jpg"))
-        dye_materials.append(DyeMaterial(name="Red Cabbage", base_color="Purple", image="https://example.com/red_cabbage.jpg"))
-        dye_materials.append(DyeMaterial(name="Pokeweed Berries", base_color="Magenta", image="https://example.com/pokeweed.jpg"))       
-        dye_materials.append(DyeMaterial(name="Butterfly Pea Flower", base_color="Blue", image="https://example.com/butterfly_pea.jpg"))
-        dye_materials.append(DyeMaterial(name="Walnut Hulls", base_color="Brown", image="https://example.com/walnut_hulls.jpg"))
-        dye_materials.append(DyeMaterial(name="Onion Skins", base_color="Orange", image="https://example.com/onion_skins.jpg"))
-#091231
+        dye_materials = [
+                    DyeMaterial(name="Indigo", r=9, g=18, b=49, image="./images/indigo.jpg"),
+                    DyeMaterial(name="Madder Root", r=204, g=51, b=51, image="./static/images/madder-root.png"),
+                    DyeMaterial(name="Turmeric", r=255, g=221, b=51, image="https://example.com/turmeric.jpg"),
+                    DyeMaterial(name="Red Cabbage", r=102, g=51, b=153, image="https://example.com/red_cabbage.jpg"),
+                    DyeMaterial(name="Pokeweed Berries", r=204, g=0, b=102, image="https://example.com/pokeweed.jpg"),
+                    DyeMaterial(name="Butterfly Pea Flower", r=51, g=102, b=204, image="https://example.com/butterfly_pea.jpg"),
+                    DyeMaterial(name="Walnut Hulls", r=102, g=51, b=0, image="https://example.com/walnut_hulls.jpg"),
+                    DyeMaterial(name="Onion Skins", r=255, g=165, b=0, image="https://example.com/onion_skins.jpg"),
+                ]
 
-# how it will effect the dye material
-        mordants.append(Mordant(name="Alum", effect="Brightens color", image="https://example.com/alum.jpg"))
-        mordants.append(Mordant(name="Iron", effect="Darkens color", image="https://example.com/iron.jpg"))
-        mordants.append(Mordant(name="Copper", effect="Shifts colors towards green", image="https://example.com/copper.jpg"))
-        mordants.append(Mordant(name="Vinegar", effect="Enhances red tones", image="https://example.com/vinegar.jpg"))
-        mordants.append(Mordant(name="Ammonia", effect="Shifts color towards blue-green", image="https://example.com/ammonia.jpg"))
-        mordants.append(Mordant(name="Tannin", effect="Increases colorfastness", image="https://example.com/tannin.jpg"))
-# effect = +4 to R
+        mordants = [
+                    Mordant(name="Alum", r_effect=10, g_effect=10, b_effect=10, image="https://example.com/alum.jpg"),
+                    Mordant(name="Iron", r_effect=-40, g_effect=-40, b_effect=-40, image="https://example.com/iron.jpg"),
+                    Mordant(name="Copper", r_effect=-20, g_effect=20, b_effect=-20, image="https://example.com/copper.jpg"),
+                    Mordant(name="Vinegar", r_effect=20, g_effect=0, b_effect=0, image="https://example.com/vinegar.jpg"),
+                    Mordant(name="Ammonia", r_effect=0, g_effect=10, b_effect=30, image="https://example.com/ammonia.jpg"),
+                    Mordant(name="Tannin", r_effect=5, g_effect=5, b_effect=5, image="https://example.com/tannin.jpg"),
+                ]
 
 
-        dye_results.append(DyeResult(dye_material_id=1, mordant_id=1, resulting_color="#4B0082", intensity=7))  # Indigo + Alum → Deep Blue
-        dye_results.append(DyeResult(dye_material_id=1, mordant_id=2, resulting_color="#2D1B1B", intensity=9))  # Indigo + Iron → Dark Indigo
-        dye_results.append(DyeResult(dye_material_id=2, mordant_id=1, resulting_color="#FF5733", intensity=8))  # Madder + Alum → Bright Red
-        dye_results.append(DyeResult(dye_material_id=2, mordant_id=3, resulting_color="#80461B", intensity=7))  # Madder + Copper → Rusty Orange
-        dye_results.append(DyeResult(dye_material_id=3, mordant_id=1, resulting_color="#FFD700", intensity=9))  # Turmeric + Alum → Vibrant Yellow
-        dye_results.append(DyeResult(dye_material_id=3, mordant_id=2, resulting_color="#A67B5B", intensity=7))  # Turmeric + Iron → Mustard Brown
-        dye_results.append(DyeResult(dye_material_id=4, mordant_id=4, resulting_color="#D81B60", intensity=6))  # Red Cabbage + Vinegar → Pink
-        dye_results.append(DyeResult(dye_material_id=4, mordant_id=5, resulting_color="#006400", intensity=5))  # Red Cabbage + Ammonia → Green
-        dye_results.append(DyeResult(dye_material_id=5, mordant_id=2, resulting_color="#800020", intensity=7))  # Pokeweed + Iron → Burgundy
-        dye_results.append(DyeResult(dye_material_id=6, mordant_id=3, resulting_color="#4682B4", intensity=6))  # Butterfly Pea + Copper → Teal
-        dye_results.append(DyeResult(dye_material_id=7, mordant_id=2, resulting_color="#5D4037", intensity=8))  # Walnut Hulls + Iron → Deep Brown
-        dye_results.append(DyeResult(dye_material_id=8, mordant_id=1, resulting_color="#FFA500", intensity=7))  # Onion Skins + Alum → Bright Orange
+        dye_results = [
+            DyeResult(dye_material_id=1, mordant_id=1, final_hex="4B0082"),  # Indigo + Alum → Deep Blue
+            DyeResult(dye_material_id=1, mordant_id=2, final_hex="2D1B1B"),  # Indigo + Iron → Dark Indigo
+            DyeResult(dye_material_id=2, mordant_id=1, final_hex="FF5733"),  # Madder + Alum → Bright Red
+            DyeResult(dye_material_id=2, mordant_id=3, final_hex="80461B"),  # Madder + Copper → Rusty Orange
+            DyeResult(dye_material_id=3, mordant_id=1, final_hex="FFD700"),  # Turmeric + Alum → Vibrant Yellow
+            DyeResult(dye_material_id=3, mordant_id=2, final_hex="A67B5B"),  # Turmeric + Iron → Mustard Brown
+            DyeResult(dye_material_id=4, mordant_id=4, final_hex="D81B60"),  # Red Cabbage + Vinegar → Pink
+            DyeResult(dye_material_id=4, mordant_id=5, final_hex="006400"),  # Red Cabbage + Ammonia → Green
+            DyeResult(dye_material_id=5, mordant_id=2, final_hex="800020"),  # Pokeweed + Iron → Burgundy
+            DyeResult(dye_material_id=6, mordant_id=3, final_hex="4682B4"),  # Butterfly Pea + Copper → Teal
+            DyeResult(dye_material_id=7, mordant_id=2, final_hex="5D4037"),  # Walnut Hulls + Iron → Deep Brown
+            DyeResult(dye_material_id=8, mordant_id=1, final_hex="FFA500"),  # Onion Skins + Alum → Bright Orange
+        ]
 # just has dye material id and mordant id
 # on front end, have a way to generate what the RGB would be
 # When user creates a new dye (combines dye material and mordant) -> (calculation would occur when dyeResult is generated)
@@ -67,7 +69,6 @@ if __name__ == '__main__':
 
 
         db.session.add_all(dye_materials + mordants + dye_results)
-
-
         db.session.commit()
+        
         print("Dye materials, mordants, and dye results successfully seeded!")
