@@ -1,8 +1,11 @@
 import App from "./components/App";
-import ErrorPage from "./components/ErrorPage"
-import DyeList from "./components/DyeList"
+import ErrorPage from "./components/ErrorPage";
+import Home from "./components/Home";
 import NewDyeForm from "./components/NewDyeForm";
-import DyeResults from "./components/DyeResult"
+import DyeList from "./components/DyeList";
+import MordantList from "./components/MordantList";
+import DyeResult from "./components/DyeResult";
+
 
 const routes = [
     {
@@ -12,15 +15,23 @@ const routes = [
         children: [
             {
                 path: "/",
-                element: <DyeList />
+                element: <Home />
             },
             {
                 path: "/add_dye",
                 element: <NewDyeForm />
             },
             {
+                path: "/dyes",
+                element: <DyeList />
+            },
+            {
+                path: "/mordants",
+                element: <MordantList />
+            },
+            {
                 path: "/dye_results",
-                element: <DyeResults />
+                element: <DyeResult />
             }
         ]
     }
