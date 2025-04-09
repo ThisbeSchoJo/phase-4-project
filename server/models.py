@@ -18,6 +18,8 @@ class DyeMaterial(db.Model, SerializerMixin):
 
     dye_results = db.relationship('DyeResult', back_populates='dye_material')
 
+    serialize_rules = ('-dye_results.dye_material',)
+
     @validates('name', 'image')
     def validate_name(self, column_name, value):
         if type(value) != str:
@@ -56,12 +58,14 @@ class Mordant(db.Model, SerializerMixin):
 
     dye_results = db.relationship('DyeResult', back_populates='mordant')
 
+    serialize_rules = ('-dye_results.mordant',)
+
     @validates('name', 'image')
     def validate_name(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif not (0 <= value <= 255):
-            raise ValueError(f"{column_name} must be between 0 and 255!")
+        elif len(value) < 3:
+            raise ValueError(f"{column_name} must be at least 3 characters long!")
         else:
             return value
         
@@ -69,9 +73,7 @@ class Mordant(db.Model, SerializerMixin):
     def validate_effect(self, column_name, value):
         if type(value) != int:
             raise TypeError(f"{column_name} must be an integer!")
-        elif len(value) > 3:
-            raise ValueError(f"{column_name} cannot be longer than 3 characters!")
-        elif value > 255 or value < -255 :
+        elif value < -255 or value > 255:
             raise ValueError(f"{column_name} must be between -255 and 255!")
         else:
             return value
@@ -99,8 +101,8 @@ class DyeResult(db.Model, SerializerMixin):
     def validate_hex(self, column_name, value):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
-        elif len(value) != 6:
-            raise ValueError(f"{column_name} must be 7 characters long!")
+        elif not value.startswith("#") or len(value) != 7:
+            raise ValueError(f"{column_name} must be a valid hex string like '#rrggbb'!")
         else:
             return value
         
