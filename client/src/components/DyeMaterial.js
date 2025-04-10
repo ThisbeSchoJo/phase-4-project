@@ -8,24 +8,25 @@ function DyeMaterial({ dyeMaterial }) {
       <p>Hex: {dyeMaterial.hex}</p>
       <div
         style={{
-          backgroundColor: `#${dyeMaterial.hex}`,
+          backgroundColor: `${dyeMaterial.hex}`,
           width: "80px",
           height: "80px",
           border: "1px solid black",
           margin: "0 auto",
         }}
       ></div>
-      <img
-        src={dyeMaterial.image}
-        alt={dyeMaterial.name}
-        style={{
-          width: "100px",
-          height: "100px",
-          objectFit: "cover",
-          margin: "10px auto",
-          display: "block",
-        }}
-      />
+      <div className="image-container">
+        <img
+          src={dyeMaterial.image}
+          alt={dyeMaterial.name}
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            margin: "10px auto",
+            display: "block",
+          }}
+        />
+      </div>
     </div>
   );
 }

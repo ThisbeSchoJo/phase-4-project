@@ -30,7 +30,7 @@ function DyeResultList() {
   return (
     <div>
       <h1>Here is the dye result list...</h1>
-      <ul>{dyeResultComponents}</ul>
+      <div className="dye-result-grid">{dyeResultComponents}</div>
     </div>
   );
 }
