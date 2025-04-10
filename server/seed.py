@@ -24,23 +24,24 @@ if __name__ == '__main__':
         # dye_results = []
 
         dye_materials = [
-                    DyeMaterial(name="Indigo", r=9, g=18, b=49, image="./images/indigo.jpg"),
-                    DyeMaterial(name="Madder Root", r=204, g=51, b=51, image="./static/images/madder-root.png"),
-                    DyeMaterial(name="Turmeric", r=255, g=221, b=51, image="https://example.com/turmeric.jpg"),
-                    DyeMaterial(name="Red Cabbage", r=102, g=51, b=153, image="https://example.com/red_cabbage.jpg"),
-                    DyeMaterial(name="Pokeweed Berries", r=204, g=0, b=102, image="https://example.com/pokeweed.jpg"),
-                    DyeMaterial(name="Butterfly Pea Flower", r=51, g=102, b=204, image="https://example.com/butterfly_pea.jpg"),
-                    DyeMaterial(name="Walnut Hulls", r=102, g=51, b=0, image="https://example.com/walnut_hulls.jpg"),
-                    DyeMaterial(name="Onion Skins", r=255, g=165, b=0, image="https://example.com/onion_skins.jpg"),
+                    DyeMaterial(name="Indigo", r=9, g=18, b=49, image="/images/indigo.png"),
+                    DyeMaterial(name="Madder Root", r=204, g=51, b=51, image="/images/madder-root.png"),
+                    DyeMaterial(name="Turmeric", r=255, g=221, b=51, image="/images/turmeric.png"),
+                    DyeMaterial(name="Red Cabbage", r=102, g=51, b=153, image="/images/cabbage.png"),
+                    DyeMaterial(name="Pokeweed Berries", r=204, g=0, b=102, image="/images/pokeweed.png"),
+                    DyeMaterial(name="Butterfly Pea Flower", r=51, g=102, b=204, image="/images/butterfly-pea.png"),
+                    DyeMaterial(name="Walnut Hulls", r=102, g=51, b=0, image="/images/black-walnut.png"),
+                    DyeMaterial(name="Onion Skins", r=255, g=165, b=0, image="/images/onion-skins.png"),
                 ]
+        # ./images/zz-plant.jpg"
 
         mordants = [
-                    Mordant(name="Alum", r_effect=10, g_effect=10, b_effect=10, image="https://example.com/alum.jpg"),
-                    Mordant(name="Iron", r_effect=-40, g_effect=-40, b_effect=-40, image="https://example.com/iron.jpg"),
-                    Mordant(name="Copper", r_effect=-20, g_effect=20, b_effect=-20, image="https://example.com/copper.jpg"),
-                    Mordant(name="Vinegar", r_effect=20, g_effect=0, b_effect=0, image="https://example.com/vinegar.jpg"),
-                    Mordant(name="Ammonia", r_effect=0, g_effect=10, b_effect=30, image="https://example.com/ammonia.jpg"),
-                    Mordant(name="Tannin", r_effect=5, g_effect=5, b_effect=5, image="https://example.com/tannin.jpg"),
+                    Mordant(name="Alum", r_effect=10, g_effect=10, b_effect=10, image="/images/alum-stone.png"),
+                    Mordant(name="Iron", r_effect=-40, g_effect=-40, b_effect=-40, image="/images/iron.png"),
+                    Mordant(name="Copper", r_effect=-20, g_effect=20, b_effect=-20, image="/images/copper.png"),
+                    Mordant(name="Vinegar", r_effect=20, g_effect=0, b_effect=0, image="/images/vinegar.png"),
+                    Mordant(name="Ammonia", r_effect=0, g_effect=10, b_effect=30, image="/images/ammonia.png"),
+                    Mordant(name="Tannin", r_effect=5, g_effect=5, b_effect=5, image="/images/black-tea.png"),
                 ]
 
 

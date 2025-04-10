@@ -100,7 +100,7 @@ class DyeResult(db.Model, SerializerMixin):
         if type(value) != str:
             raise TypeError(f"{column_name} must be a string!")
         elif len(value) != 7:
-            raise ValueError(f"{column_name} must be 7 characters long!")
+            raise ValueError(f"{column_name} must be in hex format (e.g. #000000)!")
         else:
             return value
         

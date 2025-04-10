@@ -1,4 +1,9 @@
 function DyeResult({ dyeResult }) {
+  // Add error handling for undefined dyeResult
+  if (!dyeResult) {
+    return <li>Error: Dye result data is missing</li>;
+  }
+
   return (
     <li>
       <h2>Dye Result # {dyeResult.id} </h2>

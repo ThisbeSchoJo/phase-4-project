@@ -1,22 +1,32 @@
 function DyeMaterial({ dyeMaterial }) {
   return (
-    <li className="dyematerial">
-      <h2>Dye Material # {dyeMaterial.id}</h2>
-      <h3>Name: {dyeMaterial.name}</h3>
+    <div className="dye-material-card">
+      <h3>{dyeMaterial.name}</h3>
       <p>
         RGB: ({dyeMaterial.r}, {dyeMaterial.g}, {dyeMaterial.b})
       </p>
       <p>Hex: {dyeMaterial.hex}</p>
       <div
         style={{
-          backgroundColor: dyeMaterial.hex,
-          width: "100px",
-          height: "100px",
+          backgroundColor: `#${dyeMaterial.hex}`,
+          width: "80px",
+          height: "80px",
           border: "1px solid black",
+          margin: "0 auto",
         }}
       ></div>
-      <img src={dyeMaterial.image} alt={dyeMaterial.name} />
-    </li>
+      <img
+        src={dyeMaterial.image}
+        alt={dyeMaterial.name}
+        style={{
+          width: "100px",
+          height: "100px",
+          objectFit: "cover",
+          margin: "10px auto",
+          display: "block",
+        }}
+      />
+    </div>
   );
 }
 
