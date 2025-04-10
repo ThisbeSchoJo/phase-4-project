@@ -10,7 +10,6 @@ class DyeMaterial(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    # base_color = db.Column(db.String, nullable=False)
     r = db.Column(db.Integer, nullable=False)
     g = db.Column(db.Integer, nullable=False)
     b = db.Column(db.Integer, nullable=False)

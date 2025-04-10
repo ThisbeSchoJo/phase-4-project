@@ -7,7 +7,9 @@ function NewDyeForm(){
 
     const [formData, setFormData] = useState({
         name: "",
-        base_color: "",
+        r: "",
+        g: "",
+        b: "",
         image: ""
     })
 
@@ -33,7 +35,9 @@ function NewDyeForm(){
 
                     setFormData({
                         name: "",
-                        base_color: "",
+                        r: "",
+                        g: "",
+                        b: "",
                         image: ""
                     })
 
@@ -60,8 +64,16 @@ function NewDyeForm(){
                 <input onChange={updateFormData} type="text" id="new-dye" name="name" value={formData.name}/>
                 <br></br>
                 <br></br>
-                <label htmlFor="new-base-color">Base Color: </label>
-                <input onChange={updateFormData} type="text" id="new-base-color" name="base_color" value={formData.base_color}/>
+                <label htmlFor="new-r">Red: </label>
+                <input onChange={updateFormData} type="number" id="new-r" name="r" value={formData.r}/>
+                <br></br>
+                <br></br>
+                <label htmlFor="new-g">Green: </label>
+                <input onChange={updateFormData} type="number" id="new-g" name="g" value={formData.g}/>
+                <br></br>
+                <br></br>
+                <label htmlFor="new-b">Blue: </label>
+                <input onChange={updateFormData} type="number" id="new-b" name="b" value={formData.b}/>
                 <br></br>
                 <br></br>
                 <label htmlFor="new-image">Image URL: </label>
