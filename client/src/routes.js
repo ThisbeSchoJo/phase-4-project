@@ -29,6 +29,10 @@ const routes = [
         element: <NewDyeForm />,
       },
       {
+        path: "/dye_lab",
+        element: <DyeLab />,
+      },
+      {
         path: "/dye_results",
         element: <DyeResultList />,
       },
