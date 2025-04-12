@@ -1,89 +1,143 @@
-import { useOutletContext, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-function NewDyeForm(){
-    const { addDyeMaterial } = useOutletContext()
-    const navigate = useNavigate()
+function NewDyeForm() {
+  const navigate = useNavigate();
+  const { addDyeMaterial } = useOutletContext();
+  const [formData, setFormData] = useState({
+    name: "",
+    r: 0,
+    g: 0,
+    b: 0,
+    image: "",
+  });
 
-    const [formData, setFormData] = useState({
-        name: "",
-        r: "",
-        g: "",
-        b: "",
-        image: ""
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === "image" ? value : parseInt(value) || 0,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("/dye-materials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
+      .then((r) => {
+        if (!r.ok) {
+          return r.json().then((err) => {
+            throw new Error(err.error || "Failed to create dye material");
+          });
+        }
+        return r.json();
+      })
+      .then((data) => {
+        addDyeMaterial(data);
+        navigate("/dyes");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert(error.message);
+      });
+  };
 
-    function handleSubmit(event) {
-
-        console.log("Submitting form with:", formData); // Debugging output
-
-
-        event.preventDefault();
-
-        fetch('/dye_materials', {
-            method: 'POST',
-            headers: {
-                "Content-Type" : "application/json",
-                "Accept" : "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => {
-            if (response.ok) {
-                response.json().then(newDyeData => {
-                    addDyeMaterial(newDyeData) //Add the new dye material to the state
-
-                    setFormData({
-                        name: "",
-                        r: "",
-                        g: "",
-                        b: "",
-                        image: ""
-                    })
-
-                    navigate('/') //redict to home page
-                })
-            } else {
-                response.json().then(errorObject => {
-                    alert(`Error: ${errorObject.error}`)
-                })
-            }
-        })
-    }
-
-    function updateFormData(event){
-        setFormData({...formData, [event.target.name]: event.target.value})
-    }
-
-
-    return(
-        <div>
-            <h2>Add a new dye!</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="new-dye">Dye Material: </label>
-                <input onChange={updateFormData} type="text" id="new-dye" name="name" value={formData.name}/>
-                <br></br>
-                <br></br>
-                <label htmlFor="new-r">Red: </label>
-                <input onChange={updateFormData} type="number" id="new-r" name="r" value={formData.r}/>
-                <br></br>
-                <br></br>
-                <label htmlFor="new-g">Green: </label>
-                <input onChange={updateFormData} type="number" id="new-g" name="g" value={formData.g}/>
-                <br></br>
-                <br></br>
-                <label htmlFor="new-b">Blue: </label>
-                <input onChange={updateFormData} type="number" id="new-b" name="b" value={formData.b}/>
-                <br></br>
-                <br></br>
-                <label htmlFor="new-image">Image URL: </label>
-                <input onChange={updateFormData} type="text" id="new-image" name="image" value={formData.image}/>
-                <br></br>
-                <br></br>
-                <input type="submit" value="Add Dye"/>
-            </form>
+  return (
+    <div className="form-container">
+      <h2>Add New Dye Material</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            minLength={3}
+          />
         </div>
-    )
+
+        <div className="form-group">
+          <label>RGB Values:</label>
+          <div style={{ display: "flex", gap: "var(--spacing-md)" }}>
+            <div>
+              <label htmlFor="r">R:</label>
+              <input
+                type="number"
+                id="r"
+                name="r"
+                min="0"
+                max="255"
+                value={formData.r}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="g">G:</label>
+              <input
+                type="number"
+                id="g"
+                name="g"
+                min="0"
+                max="255"
+                value={formData.g}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="b">B:</label>
+              <input
+                type="number"
+                id="b"
+                name="b"
+                min="0"
+                max="255"
+                value={formData.b}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label>Color Preview:</label>
+          <div
+            className="color-preview"
+            style={{
+              backgroundColor: `rgb(${formData.r}, ${formData.g}, ${formData.b})`,
+            }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Image URL:</label>
+          <input
+            type="url"
+            id="image"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            required
+            minLength={3}
+          />
+        </div>
+
+        <button type="submit" className="submit-button">
+          Add Dye Material
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default NewDyeForm;
