@@ -5,6 +5,7 @@ import NewDyeForm from "./components/NewDyeForm";
 import DyeList from "./components/DyeList";
 import MordantList from "./components/MordantList";
 import DyeResultList from "./components/DyeResultList";
+import DyeLab from "./components/DyeLab";
 
 const routes = [
   {
