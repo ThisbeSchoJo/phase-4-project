@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
+from sqlalchemy import select
 
 # Remote library imports
 from flask import request, make_response
@@ -18,10 +19,11 @@ from models import DyeMaterial, Mordant, DyeResult
 def index():
     return "<h1>Welcome to Thisbe's Dye Shop!</h1>"
 
-# Need to convert .query method to db.session.execute bc query is legacy code in SQLalchemy
 class AllDyeMaterials(Resource):
     def get(self):
-        dye_materials = DyeMaterial.query.all()
+        stmt = select(DyeMaterial)
+        result = db.session.execute(stmt)
+        dye_materials = result.scalars().all()
         response_body = [material.to_dict(only=('id', 'name', 'r', 'g', 'b', 'image', 'hex')) for material in dye_materials]
         return make_response(response_body, 200)
 
@@ -49,10 +51,6 @@ api.add_resource(AllDyeMaterials, '/dye-materials')
 
 class DyeMaterialByID(Resource):
     def get(self, id):
-        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
-        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
-        # return make_response(response_body, 200)
-
         dye_material = db.session.get(DyeMaterial, id)
         if dye_material:
             response_body = dye_material.to_dict(only=('id', 'name', 'r', 'g', 'b', 'image', 'hex'))
@@ -100,7 +98,9 @@ api.add_resource(DyeMaterialByID, '/dye-materials/<int:id>')
 
 class AllMordants(Resource):
     def get(self):
-        mordants = Mordant.query.all()
+        stmt = select(Mordant)
+        result = db.session.execute(stmt)
+        mordants = result.scalars().all()
         response_body = [mordant.to_dict(only=('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image')) for mordant in mordants]
         return make_response(response_body, 200)
 
@@ -129,10 +129,6 @@ api.add_resource(AllMordants, '/mordants')
 # MordantByID requests - get, patch, delete
 class MordantByID(Resource):
     def get(self, id):
-        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
-        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
-        # return make_response(response_body, 200)
-
         mordant = db.session.get(Mordant, id)
         if mordant:
             response_body = mordant.to_dict(only=('id', 'name', 'r_effect', 'g_effect', 'b_effect', 'image'))
@@ -180,7 +176,9 @@ api.add_resource(MordantByID, '/mordants/<int:id>')
 
 class AllDyeResults(Resource):
     def get(self):
-        dye_results = DyeResult.query.all()
+        stmt = select(DyeResult)
+        result = db.session.execute(stmt)
+        dye_results = result.scalars().all()
         response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex')) for result in dye_results]
         return make_response(response_body, 200)
 
@@ -208,10 +206,6 @@ api.add_resource(AllDyeResults, '/dye-results')
 # DyeResultsByID requests - get, patch, delete
 class DyeResultByID(Resource):
     def get(self, id):
-        # dye = DyeMaterial.query.filter(DyeMaterial.id == id).first()
-        # response_body = f'<p>Dye: {dye.name}, Base Color: {dye.base_color}'
-        # return make_response(response_body, 200)
-
         dye_result = db.session.get(DyeResult, id)
         if dye_result:
             response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex'))

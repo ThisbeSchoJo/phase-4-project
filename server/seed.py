@@ -4,6 +4,7 @@
 # from random import randint, choice as rc
 
 # Remote library imports
+from sqlalchemy import delete
 
 # Local imports
 from app import app
@@ -12,9 +13,10 @@ from models import db, DyeMaterial, Mordant, DyeResult
 if __name__ == '__main__':
     with app.app_context():
         # Delete current data before seeding...
-        DyeResult.query.delete()
-        DyeMaterial.query.delete()
-        Mordant.query.delete()
+        db.session.execute(delete(DyeResult))
+        db.session.execute(delete(DyeMaterial))
+        db.session.execute(delete(Mordant))
+        db.session.commit()
 
         # Begin seeding...
         print("Starting seed...")

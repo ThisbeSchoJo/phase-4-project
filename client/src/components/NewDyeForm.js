@@ -6,9 +6,9 @@ function NewDyeForm() {
   const { addDyeMaterial } = useOutletContext();
   const [formData, setFormData] = useState({
     name: "",
-    r: 0,
-    g: 0,
-    b: 0,
+    r: "",
+    g: "",
+    b: "",
     image: "",
   });
 
@@ -16,18 +16,49 @@ function NewDyeForm() {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: name === "image" ? value : parseInt(value) || 0,
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Convert string values to numbers
+    const r = Number(formData.r);
+    const g = Number(formData.g);
+    const b = Number(formData.b);
+
+    // Check if values are valid numbers
+    if (formData.r === "" || formData.g === "" || formData.b === "") {
+      alert("Please enter values for all RGB fields");
+      return;
+    }
+
+    // Check if values are within valid range
+    if (r < 0 || r > 255) {
+      alert("Red value must be between 0 and 255");
+      return;
+    }
+    if (g < 0 || g > 255) {
+      alert("Green value must be between 0 and 255");
+      return;
+    }
+    if (b < 0 || b > 255) {
+      alert("Blue value must be between 0 and 255");
+      return;
+    }
+
     fetch("/dye-materials", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        ...formData,
+        r: r,
+        g: g,
+        b: b,
+      }),
     })
       .then((r) => {
         if (!r.ok) {
@@ -114,7 +145,9 @@ function NewDyeForm() {
           <div
             className="color-preview"
             style={{
-              backgroundColor: `rgb(${formData.r}, ${formData.g}, ${formData.b})`,
+              backgroundColor: `rgb(${formData.r || 0}, ${formData.g || 0}, ${
+                formData.b || 0
+              })`,
             }}
           />
         </div>
