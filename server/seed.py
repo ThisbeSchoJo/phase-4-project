@@ -48,28 +48,117 @@ if __name__ == '__main__':
 
 
         dye_results = [
-            DyeResult(dye_material_id=1, mordant_id=1, final_hex="#4B0082"),  # Indigo + Alum → Deep Blue
-            DyeResult(dye_material_id=1, mordant_id=2, final_hex="#2D1B1B"),  # Indigo + Iron → Dark Indigo
-            DyeResult(dye_material_id=2, mordant_id=1, final_hex="#FF5733"),  # Madder + Alum → Bright Red
-            DyeResult(dye_material_id=2, mordant_id=3, final_hex="#80461B"),  # Madder + Copper → Rusty Orange
-            DyeResult(dye_material_id=3, mordant_id=1, final_hex="#FFD700"),  # Turmeric + Alum → Vibrant Yellow
-            DyeResult(dye_material_id=3, mordant_id=2, final_hex="#A67B5B"),  # Turmeric + Iron → Mustard Brown
-            DyeResult(dye_material_id=4, mordant_id=4, final_hex="#D81B60"),  # Red Cabbage + Vinegar → Pink
-            DyeResult(dye_material_id=4, mordant_id=5, final_hex="#006400"),  # Red Cabbage + Ammonia → Green
-            DyeResult(dye_material_id=5, mordant_id=2, final_hex="#800020"),  # Pokeweed + Iron → Burgundy
-            DyeResult(dye_material_id=6, mordant_id=3, final_hex="#4682B4"),  # Butterfly Pea + Copper → Teal
-            DyeResult(dye_material_id=7, mordant_id=2, final_hex="#5D4037"),  # Walnut Hulls + Iron → Deep Brown
-            DyeResult(dye_material_id=8, mordant_id=1, final_hex="#FFA500"),  # Onion Skins + Alum → Bright Orange
+            # Indigo + Alum (r+10, g+10, b+10) → #131C3B
+            DyeResult(dye_material_id=1, mordant_id=1, final_hex="#131C3B"),
+            # Indigo + Iron (r-40, g-40, b-40) → #000000
+            DyeResult(dye_material_id=1, mordant_id=2, final_hex="#000000"),
+            # Indigo + Copper (r-20, g+20, b-20) → #000026
+            DyeResult(dye_material_id=1, mordant_id=3, final_hex="#000026"),
+            # Indigo + Vinegar (r+20, g+0, b+0) → #1D1231
+            DyeResult(dye_material_id=1, mordant_id=4, final_hex="#1D1231"),
+            # Indigo + Ammonia (r+0, g+10, b+30) → #091C4F
+            DyeResult(dye_material_id=1, mordant_id=5, final_hex="#091C4F"),
+            # Indigo + Tannin (r+5, g+5, b+5) → #0E1D32
+            DyeResult(dye_material_id=1, mordant_id=6, final_hex="#0E1D32"),
+            
+            # Madder Root (r=204, g=51, b=51) combinations
+            # Madder + Alum (r+10, g+10, b+10) → #CE3D3D
+            DyeResult(dye_material_id=2, mordant_id=1, final_hex="#CE3D3D"),
+            # Madder + Iron (r-40, g-40, b-40) → #A60B0B
+            DyeResult(dye_material_id=2, mordant_id=2, final_hex="#A60B0B"),
+            # Madder + Copper (r-20, g+20, b-20) → #BC473D
+            DyeResult(dye_material_id=2, mordant_id=3, final_hex="#BC473D"),
+            # Madder + Vinegar (r+20, g+0, b+0) → #DC3333
+            DyeResult(dye_material_id=2, mordant_id=4, final_hex="#DC3333"),
+            # Madder + Ammonia (r+0, g+10, b+30) → #CC3D51
+            DyeResult(dye_material_id=2, mordant_id=5, final_hex="#CC3D51"),
+            # Madder + Tannin (r+5, g+5, b+5) → #D13838
+            DyeResult(dye_material_id=2, mordant_id=6, final_hex="#D13838"),
+            
+            # Turmeric (r=255, g=221, b=51) combinations
+            # Turmeric + Alum (r+10, g+10, b+10) → #FFE73D
+            DyeResult(dye_material_id=3, mordant_id=1, final_hex="#FFE73D"),
+            # Turmeric + Iron (r-40, g-40, b-40) → #D7B50B
+            DyeResult(dye_material_id=3, mordant_id=2, final_hex="#D7B50B"),
+            # Turmeric + Copper (r-20, g+20, b-20) → #EBFF1F
+            DyeResult(dye_material_id=3, mordant_id=3, final_hex="#EBFF1F"),
+            # Turmeric + Vinegar (r+20, g+0, b+0) → #FFDD33
+            DyeResult(dye_material_id=3, mordant_id=4, final_hex="#FFDD33"),
+            # Turmeric + Ammonia (r+0, g+10, b+30) → #FFDF51
+            DyeResult(dye_material_id=3, mordant_id=5, final_hex="#FFDF51"),
+            # Turmeric + Tannin (r+5, g+5, b+5) → #FFE238
+            DyeResult(dye_material_id=3, mordant_id=6, final_hex="#FFE238"),
+            
+            # Red Cabbage (r=102, g=51, b=153) combinations
+            # Red Cabbage + Alum (r+10, g+10, b+10) → #6C3DA7
+            DyeResult(dye_material_id=4, mordant_id=1, final_hex="#6C3DA7"),
+            # Red Cabbage + Iron (r-40, g-40, b-40) → #3E0B71
+            DyeResult(dye_material_id=4, mordant_id=2, final_hex="#3E0B71"),
+            # Red Cabbage + Copper (r-20, g+20, b-20) → #5245A7
+            DyeResult(dye_material_id=4, mordant_id=3, final_hex="#5245A7"),
+            # Red Cabbage + Vinegar (r+20, g+0, b+0) → #7A3399
+            DyeResult(dye_material_id=4, mordant_id=4, final_hex="#7A3399"),
+            # Red Cabbage + Ammonia (r+0, g+10, b+30) → #663DB7
+            DyeResult(dye_material_id=4, mordant_id=5, final_hex="#663DB7"),
+            # Red Cabbage + Tannin (r+5, g+5, b+5) → #6B389C
+            DyeResult(dye_material_id=4, mordant_id=6, final_hex="#6B389C"),
+            
+            # Pokeweed Berries (r=204, g=0, b=102) combinations
+            # Pokeweed + Alum (r+10, g+10, b+10) → #D60A70
+            DyeResult(dye_material_id=5, mordant_id=1, final_hex="#D60A70"),
+            # Pokeweed + Iron (r-40, g-40, b-40) → #A6003E
+            DyeResult(dye_material_id=5, mordant_id=2, final_hex="#A6003E"),
+            # Pokeweed + Copper (r-20, g+20, b-20) → #BC147A
+            DyeResult(dye_material_id=5, mordant_id=3, final_hex="#BC147A"),
+            # Pokeweed + Vinegar (r+20, g+0, b+0) → #DC0066
+            DyeResult(dye_material_id=5, mordant_id=4, final_hex="#DC0066"),
+            # Pokeweed + Ammonia (r+0, g+10, b+30) → #CC0A84
+            DyeResult(dye_material_id=5, mordant_id=5, final_hex="#CC0A84"),
+            # Pokeweed + Tannin (r+5, g+5, b+5) → #D1056B
+            DyeResult(dye_material_id=5, mordant_id=6, final_hex="#D1056B"),
+            
+            # Butterfly Pea Flower (r=51, g=102, b=204) combinations
+            # Butterfly Pea + Alum (r+10, g+10, b+10) → #3D70D6
+            DyeResult(dye_material_id=6, mordant_id=1, final_hex="#3D70D6"),
+            # Butterfly Pea + Iron (r-40, g-40, b-40) → #0B3EA4
+            DyeResult(dye_material_id=6, mordant_id=2, final_hex="#0B3EA4"),
+            # Butterfly Pea + Copper (r-20, g+20, b-20) → #1F7AE6
+            DyeResult(dye_material_id=6, mordant_id=3, final_hex="#1F7AE6"),
+            # Butterfly Pea + Vinegar (r+20, g+0, b+0) → #4566CC
+            DyeResult(dye_material_id=6, mordant_id=4, final_hex="#4566CC"),
+            # Butterfly Pea + Ammonia (r+0, g+10, b+30) → #3366E6
+            DyeResult(dye_material_id=6, mordant_id=5, final_hex="#3366E6"),
+            # Butterfly Pea + Tannin (r+5, g+5, b+5) → #386BD1
+            DyeResult(dye_material_id=6, mordant_id=6, final_hex="#386BD1"),
+            
+            # Walnut Hulls (r=102, g=51, b=0) combinations
+            # Walnut + Alum (r+10, g+10, b+10) → #6C3D0A
+            DyeResult(dye_material_id=7, mordant_id=1, final_hex="#6C3D0A"),
+            # Walnut + Iron (r-40, g-40, b-40) → #3E0B00
+            DyeResult(dye_material_id=7, mordant_id=2, final_hex="#3E0B00"),
+            # Walnut + Copper (r-20, g+20, b-20) → #52450A
+            DyeResult(dye_material_id=7, mordant_id=3, final_hex="#52450A"),
+            # Walnut + Vinegar (r+20, g+0, b+0) → #7A3300
+            DyeResult(dye_material_id=7, mordant_id=4, final_hex="#7A3300"),
+            # Walnut + Ammonia (r+0, g+10, b+30) → #663D1E
+            DyeResult(dye_material_id=7, mordant_id=5, final_hex="#663D1E"),
+            # Walnut + Tannin (r+5, g+5, b+5) → #6B3805
+            DyeResult(dye_material_id=7, mordant_id=6, final_hex="#6B3805"),
+            
+            # Onion Skins (r=255, g=165, b=0) combinations
+            # Onion + Alum (r+10, g+10, b+10) → #FFAF0A
+            DyeResult(dye_material_id=8, mordant_id=1, final_hex="#FFAF0A"),
+            # Onion + Iron (r-40, g-40, b-40) → #D77D00
+            DyeResult(dye_material_id=8, mordant_id=2, final_hex="#D77D00"),
+            # Onion + Copper (r-20, g+20, b-20) → #EBB90A
+            DyeResult(dye_material_id=8, mordant_id=3, final_hex="#EBB90A"),
+            # Onion + Vinegar (r+20, g+0, b+0) → #FFA500
+            DyeResult(dye_material_id=8, mordant_id=4, final_hex="#FFA500"),
+            # Onion + Ammonia (r+0, g+10, b+30) → #FFA51E
+            DyeResult(dye_material_id=8, mordant_id=5, final_hex="#FFA51E"),
+            # Onion + Tannin (r+5, g+5, b+5) → #FFAA05
+            DyeResult(dye_material_id=8, mordant_id=6, final_hex="#FFAA05"),
         ]
-# just has dye material id and mordant id
-# on front end, have a way to generate what the RGB would be
-# When user creates a new dye (combines dye material and mordant) -> (calculation would occur when dyeResult is generated)
-# only able to create dye result on front end
-# stretch goal for user authorization (so authorized users can add dye materials and resulting colors)
-# stretch goal of using AI to figure out what the effect of a mordant is
-#   use AI to figure out what the dye material + mordant resulting color would be
-# open AI
-
 
         db.session.add_all(dye_materials + mordants + dye_results)
         db.session.commit()

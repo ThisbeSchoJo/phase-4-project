@@ -3,7 +3,8 @@ import { useOutletContext } from "react-router-dom";
 
 function DyeLab() {
   // Get all the context values we need
-  const { dyeMaterials, mordants, addDyeResult } = useOutletContext();
+  const { dyeMaterials, mordants, addDyeResult, dyeResults } =
+    useOutletContext();
   const [previewColor, setPreviewColor] = useState("#FFFFFF");
 
   const [formData, setFormData] = useState({
@@ -67,22 +68,39 @@ function DyeLab() {
 
       // Only calculate the preview if both a dye material and mordant are selected
       if (dyeMaterialId && mordantId) {
-        // Find the selected dye material and mordant objects from the arrays
-        // We use find() to locate the objects with matching IDs
-        const selectedDyeMaterial = dyeMaterials.find(
-          (dm) => dm.id === parseInt(dyeMaterialId)
-        );
-        const selectedMordant = mordants.find(
-          (m) => m.id === parseInt(mordantId)
+        // Check if there's already a dye result for this combination
+        const existingDyeResult = dyeResults.find(
+          (dr) =>
+            dr.dye_material_id === parseInt(dyeMaterialId) &&
+            dr.mordant_id === parseInt(mordantId)
         );
 
-        // If both objects are found, calculate and set the preview color
-        if (selectedDyeMaterial && selectedMordant) {
-          const resultingColor = calculateResultingColor(
-            selectedDyeMaterial,
-            selectedMordant
+        if (existingDyeResult) {
+          // Use the existing color if available
+          setPreviewColor(existingDyeResult.final_hex);
+          console.log(
+            "Preview using existing dye result color:",
+            existingDyeResult.final_hex
           );
-          setPreviewColor(resultingColor);
+        } else {
+          // Find the selected dye material and mordant objects from the arrays
+          // We use find() to locate the objects with matching IDs
+          const selectedDyeMaterial = dyeMaterials.find(
+            (dm) => dm.id === parseInt(dyeMaterialId)
+          );
+          const selectedMordant = mordants.find(
+            (m) => m.id === parseInt(mordantId)
+          );
+
+          // If both objects are found, calculate and set the preview color
+          if (selectedDyeMaterial && selectedMordant) {
+            const resultingColor = calculateResultingColor(
+              selectedDyeMaterial,
+              selectedMordant
+            );
+            setPreviewColor(resultingColor);
+            console.log("Preview using calculated color:", resultingColor);
+          }
         }
       } else {
         // Reset to white if either selection is missing
@@ -103,10 +121,27 @@ function DyeLab() {
     );
 
     if (selectedDyeMaterial && selectedMordant) {
-      const finalHex = calculateResultingColor(
-        selectedDyeMaterial,
-        selectedMordant
+      // Check if there's already a dye result for this combination
+      const existingDyeResult = dyeResults.find(
+        (dr) =>
+          dr.dye_material_id === parseInt(formData.dye_material_id) &&
+          dr.mordant_id === parseInt(formData.mordant_id)
       );
+
+      let finalHex;
+
+      if (existingDyeResult) {
+        // Use the existing color if available
+        finalHex = existingDyeResult.final_hex;
+        console.log("Using existing dye result color:", finalHex);
+      } else {
+        // Calculate a new color if no existing result
+        finalHex = calculateResultingColor(
+          selectedDyeMaterial,
+          selectedMordant
+        );
+        console.log("Calculated new color:", finalHex);
+      }
 
       // Use the addDyeResult function from the context
       addDyeResult({
