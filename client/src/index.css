@@ -324,3 +324,179 @@ nav a.active {
   margin: var(--spacing-sm) auto;
   border-radius: var(--border-radius-sm);
 }
+
+/* DyeLab Styles */
+.dye-lab {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dye-lab h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.dye-lab-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dye-lab-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dye-materials-section,
+.mordants-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dye-materials-section h3,
+.mordants-section h3 {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.dye-preview-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.color-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.color-info {
+  text-align: center;
+  width: 100%;
+}
+
+.color-info p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.create-dye-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.create-dye-button:hover {
+  background-color: #45a049;
+}
+
+.create-dye-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.dye-material-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dye-material-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dye-material-card.selected {
+  border: 2px solid #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.dye-results-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dye-results-section h3 {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* Color Preview Styles */
+.color-preview-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.color-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-info {
+  text-align: center;
+}
+
+.color-info p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Simple Color Preview */
+.simple-preview {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-box {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
