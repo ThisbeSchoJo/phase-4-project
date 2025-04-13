@@ -16,11 +16,8 @@ function DyeResult({ dyeResult }) {
   return (
     <div className="dye-result-card">
       {/* <h3>Dye Result #{dyeResult.id}</h3> */}
-      <p>
-        {/* Dye Material ID: {dyeResult.dye_material_id} + Mordant ID:{" "} {dyeResult.mordant_id} */}
-        {dyeMaterialName} + {mordantName}
-      </p>
       <p>{dyeResult.final_hex}</p>
+      <p>{dyeMaterialName} + {mordantName}</p>
       <div
         className="color-display"
         style={{

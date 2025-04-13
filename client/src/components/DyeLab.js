@@ -122,14 +122,14 @@ function handleSubmit(e) {
       setPreviewColor("#FFFFFF");
     }
   };
-      
+
   return (
     <div>
       <div className="form-container">
         <h2>Create a new natural dye!</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="dye_material">Dye Material</label>
+            {/* <label htmlFor="dye_material">Dye Material</label> */}
             <select
               id="dye_material"
               name="dye_material_id"
@@ -145,7 +145,7 @@ function handleSubmit(e) {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="mordant">Mordant</label>
+            {/* <label htmlFor="mordant"></label> */}
             <select
               id="mordant"
               name="mordant_id"
@@ -167,7 +167,7 @@ function handleSubmit(e) {
               className="color-box"
               style={{ backgroundColor: previewColor }}
             ></div>
-            <p>Preview: {previewColor}</p>
+            <p>{previewColor}</p>
           </div>
 
           <button type="submit" className="submit-button">
