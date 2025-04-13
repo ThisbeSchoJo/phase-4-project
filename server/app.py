@@ -179,7 +179,7 @@ class AllDyeResults(Resource):
         stmt = select(DyeResult)
         result = db.session.execute(stmt)
         dye_results = result.scalars().all()
-        response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex')) for result in dye_results]
+        response_body = [result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex', 'name')) for result in dye_results]
         return make_response(response_body, 200)
 
     def post(self):
@@ -187,12 +187,13 @@ class AllDyeResults(Resource):
             new_dye_result = DyeResult(
                 dye_material_id = request.json.get('dye_material_id'),
                 mordant_id=request.json.get('mordant_id'),
-                final_hex = request.json.get('final_hex')
+                final_hex = request.json.get('final_hex'),
+                name = request.json.get('name')
             )
 
             db.session.add(new_dye_result)
             db.session.commit()
-            response_body = new_dye_result.to_dict(only = ('id', 'dye_material_id', 'mordant_id', 'final_hex'))
+            response_body = new_dye_result.to_dict(only = ('id', 'dye_material_id', 'mordant_id', 'final_hex', 'name'))
             return make_response(response_body, 201)
         except Exception as e:
             response_body = {
@@ -208,7 +209,7 @@ class DyeResultByID(Resource):
     def get(self, id):
         dye_result = db.session.get(DyeResult, id)
         if dye_result:
-            response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex'))
+            response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex', 'name'))
             return make_response(response_body, 200)
         else:
             response_body = {
@@ -223,7 +224,7 @@ class DyeResultByID(Resource):
                 for attr in request.json:
                     setattr(dye_result, attr, request.json[attr])
                 db.session.commit()
-                response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex'))
+                response_body = dye_result.to_dict(only=('id', 'dye_material_id', 'mordant_id', 'final_hex', 'name'))
                 return make_response(response_body, 200)
             except Exception as e:
                 response_body = {
