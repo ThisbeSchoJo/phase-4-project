@@ -90,7 +90,7 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      <Header />
+      {/* <Header /> */}
       <Outlet
         context={{
           dyeMaterials: dyeMaterials,

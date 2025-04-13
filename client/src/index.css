@@ -135,6 +135,21 @@ nav a.active {
   /* border-bottom: 2px solid var(--color-primary); */
 }
 
+.homepage {
+  margin-top: 2rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* ===== Grid Layouts ===== */
 .dye-grid,
 .mordant-grid,
