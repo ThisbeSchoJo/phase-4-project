@@ -500,3 +500,15 @@ nav a.active {
     text-align: center;
   } */
 }
+
+/* ===== Dye Lab Selection Images ===== */
+.dye-lab-selection-images {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.dye-lab-selection-images .image-container {
+  width: 45%;
+  margin: 0;
+}
