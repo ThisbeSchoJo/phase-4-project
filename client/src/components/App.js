@@ -60,6 +60,13 @@ function App() {
       )
       .catch((error) => console.error("Error deleting dye material:", error));
   }
+  // Mordants
+  function getMordants() {
+    fetch("/mordants")
+      .then((response) => response.json())
+      .then((data) => setMordants(data))
+      .catch((error) => console.error("Error fetching mordants:", error));
+  }
 
   // Dye Results
   function getDyeResults() {
@@ -69,12 +76,15 @@ function App() {
       .catch((error) => console.error("Error fetching dye results:", error));
   }
 
-  // Mordants
-  function getMordants() {
-    fetch("/mordants")
+  function addDyeResult(newResult) {
+    fetch("/dye-results", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newResult),
+    })
       .then((response) => response.json())
-      .then((data) => setMordants(data))
-      .catch((error) => console.error("Error fetching mordants:", error));
+      .then((addedResult) => setDyeResults([...dyeResults, addedResult]))
+      .catch((error) => console.error("Error adding dye result:", error));
   }
 
   return (
@@ -89,6 +99,7 @@ function App() {
           deleteDyeMaterial: deleteDyeMaterial,
           dyeResults: dyeResults,
           mordants: mordants,
+          addDyeResult: addDyeResult,
         }}
       />
     </div>
