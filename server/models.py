@@ -86,6 +86,7 @@ class DyeResult(db.Model, SerializerMixin):
     dye_material_id = db.Column(db.Integer, db.ForeignKey('dye_materials.id'), nullable=False)
     mordant_id = db.Column(db.Integer,db.ForeignKey('mordants.id'), nullable=False)
     final_hex = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=True)
     # resulting_color = db.Column(db.String, nullable=False)
     # intensity = db.Column(db.Integer, nullable=False)
 
@@ -103,5 +104,14 @@ class DyeResult(db.Model, SerializerMixin):
         else:
             return value
         
+    @validates('name')
+    def validate_name(self, key, value):
+        if type(value) != str:
+            raise TypeError("Name must be a string!")
+        elif len(value) < 3:
+            raise ValueError("Name must be at least 3 characters long!")
+        else:
+            return value
+
     def __repr__(self):
         return f"<Dye Result {self.id}, Dye Material ID: {self.dye_material_id}, Mordant ID: {self.mordant_id}, Final Hex: {self.final_hex}>"
