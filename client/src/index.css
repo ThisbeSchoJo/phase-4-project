@@ -316,15 +316,6 @@ nav a.active {
   transform: translateY(1px);
 }
 
-/* Color preview */
-.color-preview {
-  width: 100px;
-  height: 100px;
-  border: 1px solid var(--color-dark);
-  margin: var(--spacing-sm) auto;
-  border-radius: var(--border-radius-sm);
-}
-
 /* DyeLab Styles */
 .dye-lab {
   padding: 2rem;
@@ -387,12 +378,11 @@ nav a.active {
 }
 
 .color-preview {
-  width: 150px;
-  height: 150px;
-  border-radius: 8px;
-  border: 2px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  width: 200px;
+  height: 80px;
+  border: 1px solid var(--color-dark);
+  margin: var(--spacing-sm) auto;
+  border-radius: var(--border-radius-sm);
 }
 
 .color-info {
@@ -470,8 +460,11 @@ nav a.active {
 }
 
 .color-preview {
-  width: 100px;
+  width: 200px;
   height: 100px;
+  border: 1px solid var(--color-dark);
+  margin: var(--spacing-sm) auto;
+  border-radius: var(--border-radius-sm);
   border-radius: 8px;
   border: 2px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

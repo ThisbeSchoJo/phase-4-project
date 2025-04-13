@@ -10,7 +10,7 @@ function DyeList() {
 
   return (
     <div>
-      <h1>Here is the dye list...</h1>
+      {/* <h1>Here is the dye list...</h1> */}
       <div className="dye-grid">{dyeMaterialComponents}</div>
     </div>
   );

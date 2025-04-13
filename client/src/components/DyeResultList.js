@@ -29,7 +29,7 @@ function DyeResultList() {
 
   return (
     <div>
-      <h1>Here is the dye result list...</h1>
+      {/* <h1>Here is the dye result list...</h1> */}
       <div className="dye-result-grid">{dyeResultComponents}</div>
     </div>
   );

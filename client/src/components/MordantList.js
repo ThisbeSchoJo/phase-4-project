@@ -14,7 +14,7 @@ function MordantList() {
 
   return (
     <div>
-      <h1>Here is the mordant list...</h1>
+      {/* <h1>Here is the mordant list...</h1> */}
       <div className="mordant-grid">{mordantComponents}</div>
     </div>
   );

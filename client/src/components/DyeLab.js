@@ -3,10 +3,10 @@ import { useOutletContext } from "react-router-dom";
 
 function DyeLab() {
   // Get all the context values we need
-  const { dyeMaterials, mordants, addDyeResult, dyeResults } =
-    useOutletContext();
+  const { dyeMaterials, mordants, addDyeResult, dyeResults } =useOutletContext();
+  // Preview color starts as white (#FFFFFF)
   const [previewColor, setPreviewColor] = useState("#FFFFFF");
-
+  //Track the selected dye material and mordant from the form
   const [formData, setFormData] = useState({
     dye_material_id: "",
     mordant_id: "",
@@ -25,10 +25,17 @@ function DyeLab() {
     const blueEffect = mordant.b_effect;
 
     // Step 3: Calculate the resulting RGB values by adding the effects to the base values
-    // Use Math.max and Math.min to ensure values stay within the valid range (0-255)
-    const resultingRed = Math.max(0, Math.min(255, baseRed + redEffect));
-    const resultingGreen = Math.max(0, Math.min(255, baseGreen + greenEffect));
-    const resultingBlue = Math.max(0, Math.min(255, baseBlue + blueEffect));
+    function limitRGB(value) {
+        if (value < 0) {
+            return 0;
+        } else if (value > 255) {
+            return 255;
+        }
+        return value;
+    }
+    const resultingRed = limitRGB(baseRed + redEffect);
+    const resultingGreen = limitRGB(baseGreen + greenEffect);
+    const resultingBlue = limitRGB(baseBlue + blueEffect);
 
     // Step 4: Convert each RGB value to a two-digit hex string
     // The toString(16) converts a number to a hexadecimal string
@@ -49,69 +56,46 @@ function DyeLab() {
     return `#${hexRed}${hexGreen}${hexBlue}`;
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  // Update the form data when the user selects a different dye material or mordant
+  function handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    const updatedFormData = {
+        ...formData,
+        [name]: value, //this becomes either dye_material_id or mordant_id
+    }
+    setFormData(updatedFormData);
 
     // Check if the user changed either the dye material or mordant selection
     // This ensures we only update the preview when relevant selections change
-    if (name === "dye_material_id" || name === "mordant_id") {
-      // Get the current selections (either from the new value or the existing form data)
-      // If the user changed the dye material, use the new value for dye material ID
-      // and the existing value for mordant ID, and vice versa
-      const dyeMaterialId =
-        name === "dye_material_id" ? value : formData.dye_material_id;
-      const mordantId = name === "mordant_id" ? value : formData.mordant_id;
+    // if (name === "dye_material_id" || name === "mordant_id") {
+    // Get the current selections (either from the new value or the existing form data)
+    // If the user changed the dye material, use the new value for dye material ID
+    // and the existing value for mordant ID, and vice versa
+    const dyeMaterialId = updatedFormData.dye_material_id;
+    const mordantId = updatedFormData.mordant_id;
 
-      // Only calculate the preview if both a dye material and mordant are selected
-      if (dyeMaterialId && mordantId) {
-        // Check if there's already a dye result for this combination
-        const existingDyeResult = dyeResults.find(
-          (dr) =>
-            dr.dye_material_id === parseInt(dyeMaterialId) &&
-            dr.mordant_id === parseInt(mordantId)
-        );
+    // Finds the dye Material that matches the dyeMaterialId from the updatedFormData   
+    const selectedDyeMaterial = dyeMaterials.find((dm) => dm.id === parseInt(dyeMaterialId));
+    // Finds the mordant that matches the mordantId from the updatedFormData
+    const selectedMordant = mordants.find((m) => m.id === parseInt(mordantId));
 
-        if (existingDyeResult) {
-          // Use the existing color if available
-          setPreviewColor(existingDyeResult.final_hex);
-          console.log(
-            "Preview using existing dye result color:",
-            existingDyeResult.final_hex
-          );
-        } else {
-          // Find the selected dye material and mordant objects from the arrays
-          // We use find() to locate the objects with matching IDs
-          const selectedDyeMaterial = dyeMaterials.find(
-            (dm) => dm.id === parseInt(dyeMaterialId)
-          );
-          const selectedMordant = mordants.find(
-            (m) => m.id === parseInt(mordantId)
-          );
-
-          // If both objects are found, calculate and set the preview color
-          if (selectedDyeMaterial && selectedMordant) {
-            const resultingColor = calculateResultingColor(
-              selectedDyeMaterial,
-              selectedMordant
-            );
-            setPreviewColor(resultingColor);
-            console.log("Preview using calculated color:", resultingColor);
-          }
-        }
-      } else {
-        // Reset to white if either selection is missing
-        setPreviewColor("#FFFFFF");
-      }
+    // If both objects are found, calculate and set the preview color
+    if (selectedDyeMaterial && selectedMordant) {
+      const resultingColor = calculateResultingColor(selectedDyeMaterial, selectedMordant);
+      // Update the preview color with the calculated color
+      setPreviewColor(resultingColor);
+    //   console.log("Preview using calculated color:", resultingColor);
+    } else {
+      // Set to white if either selection is missing
+      setPreviewColor("#FFFFFF");
     }
-  };
 
-  const handleSubmit = (e) => {
+}
+
+function handleSubmit(e) {
     e.preventDefault();
-
+  
     // Calculate the final color for the dye result
     const selectedDyeMaterial = dyeMaterials.find(
       (dm) => dm.id === parseInt(formData.dye_material_id)
@@ -119,37 +103,17 @@ function DyeLab() {
     const selectedMordant = mordants.find(
       (m) => m.id === parseInt(formData.mordant_id)
     );
-
+  
     if (selectedDyeMaterial && selectedMordant) {
-      // Check if there's already a dye result for this combination
-      const existingDyeResult = dyeResults.find(
-        (dr) =>
-          dr.dye_material_id === parseInt(formData.dye_material_id) &&
-          dr.mordant_id === parseInt(formData.mordant_id)
-      );
-
-      let finalHex;
-
-      if (existingDyeResult) {
-        // Use the existing color if available
-        finalHex = existingDyeResult.final_hex;
-        console.log("Using existing dye result color:", finalHex);
-      } else {
-        // Calculate a new color if no existing result
-        finalHex = calculateResultingColor(
-          selectedDyeMaterial,
-          selectedMordant
-        );
-        console.log("Calculated new color:", finalHex);
-      }
-
+      const finalHex = calculateResultingColor(selectedDyeMaterial, selectedMordant);
+  
       // Use the addDyeResult function from the context
       addDyeResult({
         dye_material_id: parseInt(formData.dye_material_id),
         mordant_id: parseInt(formData.mordant_id),
         final_hex: finalHex,
       });
-
+  
       // Reset the form
       setFormData({
         dye_material_id: "",
@@ -158,7 +122,7 @@ function DyeLab() {
       setPreviewColor("#FFFFFF");
     }
   };
-
+      
   return (
     <div>
       <div className="form-container">
@@ -197,8 +161,8 @@ function DyeLab() {
             </select>
           </div>
 
-          {/* Simple Color Preview */}
-          <div className="simple-preview">
+          {/* Color Preview */}
+          <div className="color-preview">
             <div
               className="color-box"
               style={{ backgroundColor: previewColor }}
@@ -213,6 +177,10 @@ function DyeLab() {
       </div>
     </div>
   );
-}
+
+  }
+
 
 export default DyeLab;
+
+

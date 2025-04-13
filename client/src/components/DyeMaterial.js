@@ -5,7 +5,7 @@ function DyeMaterial({ dyeMaterial }) {
       <p>
         RGB: ({dyeMaterial.r}, {dyeMaterial.g}, {dyeMaterial.b})
       </p>
-      <p>Hex: {dyeMaterial.hex}</p>
+      <p>{dyeMaterial.hex}</p>
       <div
         style={{
           backgroundColor: `${dyeMaterial.hex}`,
