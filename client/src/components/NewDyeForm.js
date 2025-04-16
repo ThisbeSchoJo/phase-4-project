@@ -142,14 +142,30 @@ function NewDyeForm() {
 
         <div className="form-group">
           <label>Color Preview:</label>
-          <div
-            className="color-preview"
-            style={{
-              backgroundColor: `rgb(${formData.r || 0}, ${formData.g || 0}, ${
-                formData.b || 0
-              })`,
-            }}
-          />
+          <div className="color-preview">
+            <div
+              className="color-box"
+              style={{
+                backgroundColor:
+                  formData.r || formData.g || formData.b
+                    ? `rgb(${formData.r || 0}, ${formData.g || 0}, ${
+                        formData.b || 0
+                      })`
+                    : "#FFFFFF",
+              }}
+            ></div>
+            <p>
+              {formData.r || formData.g || formData.b
+                ? `#${Number(formData.r || 0)
+                    .toString(16)
+                    .padStart(2, "0")}${Number(formData.g || 0)
+                    .toString(16)
+                    .padStart(2, "0")}${Number(formData.b || 0)
+                    .toString(16)
+                    .padStart(2, "0")}`
+                : "#FFFFFF"}
+            </p>
+          </div>
         </div>
 
         <div className="form-group">
