@@ -365,6 +365,28 @@ nav a.active {
   width: 120px;
 }
 
+/* Center and evenly space RGB inputs */
+.form-group div[style*="display: flex"] {
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-group div[style*="display: flex"] > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group div[style*="display: flex"] > div label {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* Center color preview in form groups */
 .form-group .color-preview {
   margin: 0 auto;

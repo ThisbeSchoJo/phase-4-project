@@ -98,7 +98,7 @@ function NewDyeForm() {
         <div className="form-group">
           <label>RGB Values:</label>
           <div style={{ display: "flex", gap: "var(--spacing-md)" }}>
-            <div>
+            <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
               <label htmlFor="r">R:</label>
               <input
                 type="number"
@@ -109,9 +109,10 @@ function NewDyeForm() {
                 value={formData.r}
                 onChange={handleChange}
                 required
+                placeholder="0-255"
               />
             </div>
-            <div>
+            <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
               <label htmlFor="g">G:</label>
               <input
                 type="number"
@@ -122,9 +123,10 @@ function NewDyeForm() {
                 value={formData.g}
                 onChange={handleChange}
                 required
+                placeholder="0-255"
               />
             </div>
-            <div>
+            <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}  >
               <label htmlFor="b">B:</label>
               <input
                 type="number"
@@ -135,6 +137,7 @@ function NewDyeForm() {
                 value={formData.b}
                 onChange={handleChange}
                 required
+                placeholder="0-255"
               />
             </div>
           </div>
