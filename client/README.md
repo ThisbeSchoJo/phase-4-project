@@ -1,3 +1,62 @@
+# Setup
+This lesson contains the solution code from the Chatterbox lab. To run the application, open two terminal windows. In the first, enter the server/ directory and run:
+
+pipenv install && pipenv shell to enter your virtual environment.
+export FLASK_APP=app.py and export FLASK_RUN_PORT=5555 to configure your Flask environment.
+flask db upgrade to generate your database.
+python seed.py to populate it.
+python app.py to run your development server.
+
+In the second window, enter the client/ directory and run:
+
+npm install to retrieve the React project's dependencies.
+npm start to start your development server and open the application.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

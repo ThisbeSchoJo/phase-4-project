@@ -2,15 +2,21 @@ import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
 function DyeLab() {
-  // Get all the context values we need
+  // Get all the context values we need from the parent component
+  // These include the list of dye materials, mordants, and functions to add dye results
   const { dyeMaterials, mordants, addDyeResult, dyeResults } =
     useOutletContext();
-  // Preview color starts as white (#FFFFFF)
+
+  // Initialize the preview color state as white (#FFFFFF)
+  // This will be updated when a dye material and mordant are selected
   const [previewColor, setPreviewColor] = useState("#FFFFFF");
-  //Track the selected dye material and mordant from the form
+
+  // Initialize form data state to track the selected dye material and mordant IDs
+  // These start as empty strings and will be updated when the user makes selections
   const [formData, setFormData] = useState({
     dye_material_id: "",
     mordant_id: "",
+    name: "",
   });
 
   // This function calculates the resulting color when a dye material is combined with a mordant
@@ -26,6 +32,7 @@ function DyeLab() {
     const blueEffect = mordant.b_effect;
 
     // Step 3: Calculate the resulting RGB values by adding the effects to the base values
+    // This helper function ensures RGB values stay within the valid range (0-255)
     function limitRGB(value) {
       if (value < 0) {
         return 0;
@@ -34,6 +41,8 @@ function DyeLab() {
       }
       return value;
     }
+
+    // Apply the mordant effects to the base color and ensure values are within range
     const resultingRed = limitRGB(baseRed + redEffect);
     const resultingGreen = limitRGB(baseGreen + greenEffect);
     const resultingBlue = limitRGB(baseBlue + blueEffect);
@@ -59,49 +68,56 @@ function DyeLab() {
 
   // Update the form data when the user selects a different dye material or mordant
   function handleChange(e) {
+    // Get the name of the field that changed (dye_material_id or mordant_id)
+    // and its new value
     const name = e.target.name;
     const value = e.target.value;
+
+    // Create an updated form data object with the new value
     const updatedFormData = {
       ...formData,
-      [name]: value, //this becomes either dye_material_id or mordant_id
+      [name]: value, // This becomes either dye_material_id or mordant_id
     };
+
+    // Update the form data state with the new values
     setFormData(updatedFormData);
 
-    // Check if the user changed either the dye material or mordant selection
-    // This ensures we only update the preview when relevant selections change
-    // if (name === "dye_material_id" || name === "mordant_id") {
     // Get the current selections (either from the new value or the existing form data)
     // If the user changed the dye material, use the new value for dye material ID
     // and the existing value for mordant ID, and vice versa
     const dyeMaterialId = updatedFormData.dye_material_id;
     const mordantId = updatedFormData.mordant_id;
 
-    // Finds the dye Material that matches the dyeMaterialId from the updatedFormData
+    // Find the dye Material that matches the dyeMaterialId from the updatedFormData
     const selectedDyeMaterial = dyeMaterials.find(
       (dm) => dm.id === parseInt(dyeMaterialId)
     );
-    // Finds the mordant that matches the mordantId from the updatedFormData
+
+    // Find the mordant that matches the mordantId from the updatedFormData
     const selectedMordant = mordants.find((m) => m.id === parseInt(mordantId));
 
     // If both objects are found, calculate and set the preview color
     if (selectedDyeMaterial && selectedMordant) {
+      // Calculate the resulting color by combining the dye material and mordant
       const resultingColor = calculateResultingColor(
         selectedDyeMaterial,
         selectedMordant
       );
+
       // Update the preview color with the calculated color
       setPreviewColor(resultingColor);
-      //   console.log("Preview using calculated color:", resultingColor);
     } else {
       // Set to white if either selection is missing
       setPreviewColor("#FFFFFF");
     }
   }
 
+  // Handle form submission when the user clicks the "Create Dye" button
   function handleSubmit(e) {
+    // Prevent the default form submission behavior
     e.preventDefault();
 
-    // Calculate the final color for the dye result
+    // Find the selected dye material and mordant objects based on their IDs
     const selectedDyeMaterial = dyeMaterials.find(
       (dm) => dm.id === parseInt(formData.dye_material_id)
     );
@@ -109,35 +125,44 @@ function DyeLab() {
       (m) => m.id === parseInt(formData.mordant_id)
     );
 
+    // Only proceed if both a dye material and mordant are selected
     if (selectedDyeMaterial && selectedMordant) {
+      // Calculate the final color for the dye result
       const finalHex = calculateResultingColor(
         selectedDyeMaterial,
         selectedMordant
       );
 
-      // Use the addDyeResult function from the context
+      const dyeName = formData.name;
+
+      // Use the addDyeResult function from the context to add the new dye result
       addDyeResult({
         dye_material_id: parseInt(formData.dye_material_id),
         mordant_id: parseInt(formData.mordant_id),
         final_hex: finalHex,
+        name: dyeName,
       });
 
-      // Reset the form
+      // Reset the form to its initial state
       setFormData({
         dye_material_id: "",
         mordant_id: "",
+        name: "", // Reset name field
       });
+
+      // Reset the preview color to white
       setPreviewColor("#FFFFFF");
     }
   }
 
+  // Render the DyeLab component
   return (
     <div>
       <div className="form-container">
         <h2>Create a new natural dye!</h2>
         <form onSubmit={handleSubmit}>
+          {/* Dye Material Selection Dropdown */}
           <div className="form-group">
-            {/* <label htmlFor="dye_material">Dye Material</label> */}
             <select
               id="dye_material"
               name="dye_material_id"
@@ -145,6 +170,7 @@ function DyeLab() {
               onChange={handleChange}
             >
               <option value="">Select a dye material</option>
+              {/* Map through all dye materials to create option elements */}
               {dyeMaterials.map((dyeMaterial) => (
                 <option key={dyeMaterial.id} value={dyeMaterial.id}>
                   {dyeMaterial.name}
@@ -152,8 +178,9 @@ function DyeLab() {
               ))}
             </select>
           </div>
+
+          {/* Mordant Selection Dropdown */}
           <div className="form-group">
-            {/* <label htmlFor="mordant"></label> */}
             <select
               id="mordant"
               name="mordant_id"
@@ -161,6 +188,7 @@ function DyeLab() {
               onChange={handleChange}
             >
               <option value="">Select a mordant</option>
+              {/* Map through all mordants to create option elements */}
               {mordants.map((mordant) => (
                 <option key={mordant.id} value={mordant.id}>
                   {mordant.name}
@@ -169,9 +197,23 @@ function DyeLab() {
             </select>
           </div>
 
+          {/* Custom Name Input Field */}
+          <div className="form-group">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Give your dye a name:"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+
           {/* Display selected images side by side */}
+          {/* Only show this section if at least one selection has been made */}
           {(formData.dye_material_id || formData.mordant_id) && (
             <div className="dye-lab-selection-images">
+              {/* Display the selected dye material image if one is selected */}
               {formData.dye_material_id && (
                 <div className="image-container">
                   <img
@@ -184,6 +226,8 @@ function DyeLab() {
                   />
                 </div>
               )}
+
+              {/* Display the selected mordant image if one is selected */}
               {formData.mordant_id && (
                 <div className="image-container">
                   <img

@@ -8,9 +8,17 @@ function App() {
   const [dyeResults, setDyeResults] = useState([]);
   const [mordants, setMordants] = useState([]);
 
-  useEffect(getDyeMaterials, []);
-  useEffect(getDyeResults, []);
-  useEffect(getMordants, []);
+  useEffect(() => {
+    getDyeMaterials();
+  }, []);
+
+  useEffect(() => {
+    getDyeResults();
+  }, []);
+
+  useEffect(() => {
+    getMordants();
+  }, []);
 
   // Dye Materials
   function getDyeMaterials() {

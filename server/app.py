@@ -17,7 +17,7 @@ from models import DyeMaterial, Mordant, DyeResult
 
 @app.route('/')
 def index():
-    return "<h1>Welcome to Thisbe's Dye Shop!</h1>"
+    return "<h1>Welcome to Thisbe's Dye Lab!</h1>"
 
 class AllDyeMaterials(Resource):
     def get(self):

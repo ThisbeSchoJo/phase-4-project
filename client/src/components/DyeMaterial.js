@@ -1,6 +1,7 @@
 function DyeMaterial({ dyeMaterial }) {
   return (
     <div className="dye-material-card">
+      <h3>{dyeMaterial.name}</h3>
       <div className="image-container">
         <img
           src={dyeMaterial.image}
@@ -13,7 +14,6 @@ function DyeMaterial({ dyeMaterial }) {
           }}
         />
       </div>
-      <h3>{dyeMaterial.name}</h3>
       <p>
         RGB: ({dyeMaterial.r}, {dyeMaterial.g}, {dyeMaterial.b})
       </p>
