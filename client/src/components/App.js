@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-// import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 
 function App() {
@@ -111,6 +110,12 @@ function App() {
       .catch((error) => console.error("Error updating dye result:", error));
   }
 
+  function deleteDyeResult(id) {
+    fetch(`/dye-results/${id}`, { method: "DELETE" })
+      .then(() => setDyeResults((prevResults) => prevResults.filter((result) => result.id !== id)))
+      .catch((error) => console.error("Error deleting dye result:", error));
+  }
+
   return (
     <div className="app">
       <NavBar />
@@ -124,6 +129,7 @@ function App() {
           mordants: mordants,
           addDyeResult: addDyeResult,
           updateDyeResult: updateDyeResult,
+          deleteDyeResult: deleteDyeResult,
         }}
       />
     </div>

@@ -262,6 +262,38 @@ nav a.active {
   font-size: 0.9rem;
 }
 
+/* Delete button for DyeResult */
+.dye-result-card button:first-of-type {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.dye-result-card:hover button:first-of-type {
+  opacity: 1;
+}
+
+.dye-result-card button:first-of-type:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 /* ===== Image Styles ===== */
 .image-container {
   width: 180px;
@@ -322,6 +354,11 @@ nav a.active {
   justify-content: space-between;
   transition: all 0.3s ease;
   z-index: 2;
+  opacity: 0;
+}
+
+.dye-result-card:hover .edit-name-container {
+  opacity: 1;
 }
 
 .name-input {
@@ -331,7 +368,7 @@ nav a.active {
   padding: 4px 8px;
   color: var(--color-dark);
   font-size: 0.75rem;
-  width: 60%;
+  width: 70%;
   outline: none;
   transition: all 0.2s ease;
 }
@@ -343,20 +380,24 @@ nav a.active {
 
 /* Button for saving the updated name */
 .edit-name-container button {
-  background-color: var(--color-primary);
+  background-color: transparent;
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 3px;
-  padding: 4px 8px;
-  font-size: 0.75rem;
+  padding: 1px 6px;
+  font-size: 0.65rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-width: 45px;
+  white-space: nowrap;
+  overflow: visible;
+  margin-left: 2px;
 }
 
 /* Hover effect for the update button */
 .edit-name-container button:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: white;
 }
 
 /* ===== Form Styles ===== */

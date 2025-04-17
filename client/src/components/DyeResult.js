@@ -2,7 +2,8 @@ import { useOutletContext } from "react-router-dom";
 import { useState } from "react";
 
 function DyeResult({ dyeResult }) {
-  const { dyeMaterials, mordants, updateDyeResult } = useOutletContext();
+  const { dyeMaterials, mordants, updateDyeResult, deleteDyeResult } =
+    useOutletContext();
   const [newName, setNewName] = useState(dyeResult.name);
 
   // Add error handling for undefined dyeResult
@@ -19,28 +20,28 @@ function DyeResult({ dyeResult }) {
   const dyeMaterialName = dyeMaterial.name;
   const mordantName = mordant.name;
 
-  const handleUpdateName = () => {
+  function handleUpdateName() {
     const updatedResult = {
       ...dyeResult,
       name: newName,
     };
     updateDyeResult(updatedResult);
-  };
+  }
+
+  function handleDelete() {
+    deleteDyeResult(dyeResult.id);
+  }
 
   return (
     <div className="dye-result-card">
-      {/* <h3>Dye Result #{dyeResult.id}</h3> */}
-      <p>{dyeResult.final_hex}</p>
-      <p>{dyeResult.name}</p>
-      <p>
-        {dyeMaterialName} + {mordantName}
-      </p>
-      <div
-        className="color-display"
-        style={{
-          backgroundColor: dyeResult.final_hex,
-        }}
-      ></div>
+      <div className="color-display" style={{ backgroundColor: dyeResult.final_hex }} >
+        <button onClick={handleDelete}>×</button>
+        <p>{dyeResult.final_hex}</p>
+        <p>{dyeResult.name}</p>
+        <p>
+          {dyeMaterialName} + {mordantName}
+        </p>
+      </div>
 
       <div className="edit-name-container">
         <input
@@ -48,8 +49,9 @@ function DyeResult({ dyeResult }) {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           className="name-input"
+          placeholder="Enter new name"
         />
-        <button onClick={handleUpdateName}>Update</button>
+        <button onClick={handleUpdateName}>OK</button>
       </div>
     </div>
   );
