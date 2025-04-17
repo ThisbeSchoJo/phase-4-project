@@ -18,12 +18,7 @@ if __name__ == '__main__':
         db.session.execute(delete(Mordant))
         db.session.commit()
 
-        # Begin seeding...
         print("Starting seed...")
-
-        # dye_materials = []
-        # mordants = []
-        # dye_results = []
 
         dye_materials = [
                     DyeMaterial(name="Indigo", r=9, g=18, b=49, image="/images/indigo.png"),
@@ -34,7 +29,6 @@ if __name__ == '__main__':
                     DyeMaterial(name="Butterfly Pea Flower", r=51, g=102, b=204, image="/images/butterfly-pea.png"),
                     DyeMaterial(name="Walnut Hulls", r=102, g=51, b=0, image="/images/black-walnut.png"),
                     DyeMaterial(name="Onion Skins", r=255, g=165, b=0, image="/images/onion-skins.png"),
-                    # New dye materials
                     # DyeMaterial(name="Black Beans", r=51, g=51, b=102, image="/images/placeholder.png"),
                     # DyeMaterial(name="Beetroot", r=153, g=0, b=51, image="/images/placeholder.png"),
                     # DyeMaterial(name="Eucalyptus", r=102, g=153, b=51, image="/images/placeholder.png"),
@@ -47,7 +41,6 @@ if __name__ == '__main__':
                     # DyeMaterial(name="Tea Leaves", r=102, g=51, b=0, image="/images/placeholder.png"),
                     # DyeMaterial(name="Weld", r=204, g=204, b=0, image="/images/placeholder.png"),
                     # DyeMaterial(name="Yarrow", r=204, g=204, b=153, image="/images/yarrow.png"),
-                    # Additional flower-based dye materials
                     # DyeMaterial(name="Coreopsis", r=255, g=153, b=0, image="/images/coreopsis.png"),
                     # DyeMaterial(name="Dahlia", r=153, g=0, b=102, image="/images/placeholder.png"),
                     # DyeMaterial(name="Delphinium", r=51, g=51, b=153, image="/images/placeholder.png"),
@@ -88,7 +81,6 @@ if __name__ == '__main__':
                     Mordant(name="Vinegar", r_effect=20, g_effect=0, b_effect=0, image="/images/vinegar.png"),
                     Mordant(name="Ammonia", r_effect=0, g_effect=10, b_effect=30, image="/images/ammonia.png"),
                     Mordant(name="Tannin", r_effect=5, g_effect=5, b_effect=5, image="/images/black-tea.png"),
-                    # New mordants
                     # Mordant(name="Chrome", r_effect=-10, g_effect=30, b_effect=-20, image="/images/placeholder.png"),
                     # Mordant(name="Tin", r_effect=20, g_effect=20, b_effect=0, image="/images/placeholder.png"),
                     # Mordant(name="Cream of Tartar", r_effect=10, g_effect=0, b_effect=-10, image="/images/placeholder.png"),
