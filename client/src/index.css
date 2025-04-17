@@ -178,7 +178,7 @@ nav a.active {
   padding: 1.5rem;
   box-shadow: var(--shadow-md);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -188,8 +188,8 @@ nav a.active {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
-  position: relative;
+  overflow: hidden; /* Prevents content from spilling out */
+  position: relative; /* For absolute positioning of children */
 }
 
 .dye-result-card {
@@ -197,7 +197,7 @@ nav a.active {
   border-radius: 0;
   padding: 0;
   box-shadow: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
   margin: 0;
   width: 100%;
   position: relative;
@@ -208,13 +208,13 @@ nav a.active {
 
 .dye-material-card:hover,
 .mordant-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px); /* Slight upward movement on hover */
   box-shadow: var(--shadow-lg);
   border-color: var(--color-primary);
 }
 
 .dye-result-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* Larger upward movement on hover */
 }
 
 .dye-material-card h3,
@@ -225,16 +225,15 @@ nav a.active {
   font-weight: 600;
   width: 100%;
   font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-transform: uppercase; /* All caps for headings */
+  letter-spacing: 0.5px; /* Increased letter spacing for readability */
 }
 
 .dye-material-card p,
 .mordant-card p {
-  margin: 0.25rem 0;
-  font-size: 0.8rem;
-  color: var(--color-secondary);
-  width: 100%;
+  margin: 0.5rem 0;
+  color: var(--color-dark);
+  font-size: 0.9rem;
 }
 
 /* ===== Dye Result Card Specific Styles ===== */
@@ -342,6 +341,7 @@ nav a.active {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
+/* Button for saving the updated name */
 .edit-name-container button {
   background-color: var(--color-primary);
   color: white;
@@ -353,6 +353,7 @@ nav a.active {
   transition: all 0.2s ease;
 }
 
+/* Hover effect for the update button */
 .edit-name-container button:hover {
   background-color: var(--color-primary-dark);
   transform: translateY(-1px);
