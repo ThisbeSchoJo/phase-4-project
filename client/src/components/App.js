@@ -94,6 +94,23 @@ function App() {
       .catch((error) => console.error("Error adding dye result:", error));
   }
 
+  function updateDyeResult(updatedResult) {
+    fetch(`/dye-results/${updatedResult.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedResult),
+    })
+      .then((response) => response.json())
+      .then((newResult) =>
+        setDyeResults((prevResults) =>
+          prevResults.map((result) =>
+            result.id === newResult.id ? newResult : result
+          )
+        )
+      )
+      .catch((error) => console.error("Error updating dye result:", error));
+  }
+
   return (
     <div className="app">
       <NavBar />
@@ -106,6 +123,7 @@ function App() {
           dyeResults: dyeResults,
           mordants: mordants,
           addDyeResult: addDyeResult,
+          updateDyeResult: updateDyeResult,
         }}
       />
     </div>

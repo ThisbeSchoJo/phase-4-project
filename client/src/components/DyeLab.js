@@ -50,7 +50,7 @@ function DyeLab() {
     // Step 4: Convert each RGB value to a two-digit hex string
     // The toString(16) converts a number to a hexadecimal string
     // We use 16 as the radix (base) for hexadecimal
-    const toHex = (number) => {
+    function toHex(number){
       // Convert the number to a hex string
       const hexString = number.toString(16);
       // Ensure the hex string is two digits by adding a leading zero if needed
@@ -159,7 +159,7 @@ function DyeLab() {
   return (
     <div>
       <div className="form-container">
-        <h2>Create a new natural dye!</h2>
+        <h2>Create a New Natural Dye</h2>
         <form onSubmit={handleSubmit}>
           {/* Dye Material Selection Dropdown */}
           <div className="form-group">

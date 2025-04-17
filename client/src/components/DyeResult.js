@@ -1,7 +1,10 @@
 import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
 
 function DyeResult({ dyeResult }) {
-  const { dyeMaterials, mordants } = useOutletContext();
+  const { dyeMaterials, mordants, updateDyeResult } = useOutletContext();
+  const [newName, setNewName] = useState(dyeResult.name);
+
   // Add error handling for undefined dyeResult
   if (!dyeResult) {
     return <li>Error: Dye result data is missing</li>;
@@ -16,10 +19,18 @@ function DyeResult({ dyeResult }) {
   const dyeMaterialName = dyeMaterial.name;
   const mordantName = mordant.name;
 
+  const handleUpdateName = () => {
+    const updatedResult = {
+      ...dyeResult,
+      name: newName,
+    };
+    updateDyeResult(updatedResult);
+  };
+
   return (
     <div className="dye-result-card">
       {/* <h3>Dye Result #{dyeResult.id}</h3> */}
-      <p>{dyeResult.final_hex}</p>      
+      <p>{dyeResult.final_hex}</p>
       <p>{dyeResult.name}</p>
       <p>
         {dyeMaterialName} + {mordantName}
@@ -30,6 +41,16 @@ function DyeResult({ dyeResult }) {
           backgroundColor: dyeResult.final_hex,
         }}
       ></div>
+
+      <div className="edit-name-container">
+        <input
+          type="text"
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+          className="name-input"
+        />
+        <button onClick={handleUpdateName}>Update</button>
+      </div>
     </div>
   );
 }

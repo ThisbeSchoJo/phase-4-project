@@ -307,6 +307,55 @@ nav a.active {
   padding: 0;
   border: none;
   display: block;
+  position: relative;
+}
+
+/* ===== Edit Name Container ===== */
+.edit-name-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.name-input {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 3px;
+  padding: 4px 8px;
+  color: var(--color-dark);
+  font-size: 0.75rem;
+  width: 60%;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.name-input:focus {
+  background-color: white;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.edit-name-container button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-name-container button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 /* ===== Form Styles ===== */
