@@ -72,7 +72,7 @@ if __name__ == '__main__':
                     DyeMaterial(name="Mushrooms", r=153, g=51, b=51, image="/images/mushroom.png"),
                     DyeMaterial(name="Seaweed", r=51, g=102, b=51, image="/images/seaweed.png"),
                     DyeMaterial(name="Murex Shells", r=102, g=0, b=102, image="/images/murex-shell.png"),
-                    DyeMaterial(name="Brazilwood", r=153, g=0, b=51, image="/images/placeholder.png"),
+                    # DyeMaterial(name="Brazilwood", r=153, g=0, b=51, image="/images/placeholder.png"),
                     DyeMaterial(name="Logwood", r=102, g=0, b=51, image="/images/logwood.png"),
                     DyeMaterial(name="Osage Orange", r=255, g=204, b=0, image="/images/osage-orange.png"),
                     DyeMaterial(name="Fustic", r=204, g=204, b=0, image="/images/fustic.png"),
@@ -89,14 +89,14 @@ if __name__ == '__main__':
                     Mordant(name="Ammonia", r_effect=0, g_effect=10, b_effect=30, image="/images/ammonia.png"),
                     Mordant(name="Tannin", r_effect=5, g_effect=5, b_effect=5, image="/images/black-tea.png"),
                     # New mordants
-                    Mordant(name="Chrome", r_effect=-10, g_effect=30, b_effect=-20, image="/images/placeholder.png"),
-                    Mordant(name="Tin", r_effect=20, g_effect=20, b_effect=0, image="/images/placeholder.png"),
-                    Mordant(name="Cream of Tartar", r_effect=10, g_effect=0, b_effect=-10, image="/images/placeholder.png"),
-                    Mordant(name="Soda Ash", r_effect=0, g_effect=20, b_effect=0, image="/images/placeholder.png"),
-                    Mordant(name="Calcium Carbonate", r_effect=0, g_effect=10, b_effect=0, image="/images/placeholder.png"),
-                    Mordant(name="Sodium Hydrosulfite", r_effect=-30, g_effect=-30, b_effect=-30, image="/images/placeholder.png"),
-                    Mordant(name="Citric Acid", r_effect=10, g_effect=-10, b_effect=0, image="/images/placeholder.png"),
-                    Mordant(name="Oxalic Acid", r_effect=0, g_effect=0, b_effect=10, image="/images/placeholder.png"),
+                    # Mordant(name="Chrome", r_effect=-10, g_effect=30, b_effect=-20, image="/images/placeholder.png"),
+                    # Mordant(name="Tin", r_effect=20, g_effect=20, b_effect=0, image="/images/placeholder.png"),
+                    # Mordant(name="Cream of Tartar", r_effect=10, g_effect=0, b_effect=-10, image="/images/placeholder.png"),
+                    # Mordant(name="Soda Ash", r_effect=0, g_effect=20, b_effect=0, image="/images/placeholder.png"),
+                    # Mordant(name="Calcium Carbonate", r_effect=0, g_effect=10, b_effect=0, image="/images/placeholder.png"),
+                    # Mordant(name="Sodium Hydrosulfite", r_effect=-30, g_effect=-30, b_effect=-30, image="/images/placeholder.png"),
+                    # Mordant(name="Citric Acid", r_effect=10, g_effect=-10, b_effect=0, image="/images/placeholder.png"),
+                    # Mordant(name="Oxalic Acid", r_effect=0, g_effect=0, b_effect=10, image="/images/placeholder.png"),
                 ]
 
 
